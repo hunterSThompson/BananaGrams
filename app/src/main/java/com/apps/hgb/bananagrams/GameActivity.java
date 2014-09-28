@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 
 
 public class GameActivity extends Activity {
@@ -18,6 +19,8 @@ public class GameActivity extends Activity {
         setContentView(gb);
         gb.requestFocus();
     }
+
+
 
 
     @Override

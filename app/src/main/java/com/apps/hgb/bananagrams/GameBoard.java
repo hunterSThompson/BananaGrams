@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -12,6 +13,7 @@ import android.view.View;
 public class GameBoard extends View {
 
     GameActivity gameActivity;
+
     Paint backgroundColor = new Paint(Color.CYAN);
 
     public GameBoard(Context context) {
@@ -24,8 +26,10 @@ public class GameBoard extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas)
-    {
-        canvas.drawRect(0, getHeight(), getWidth(), getHeight(), backgroundColor);
+    protected void onDraw(Canvas canvas) {
+
+        canvas.drawRect(0, getHeight()/8f, getWidth(), getHeight()*7/8f, backgroundColor);
+
+        super.onDraw(canvas);
     }
 }

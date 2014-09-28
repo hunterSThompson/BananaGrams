@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="New Game"
+        android:onClick="newGameClick"
         android:id="@+id/button2" />
 
     <Button
