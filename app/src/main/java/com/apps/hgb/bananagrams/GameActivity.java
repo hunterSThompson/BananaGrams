@@ -5,18 +5,28 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 
 public class GameActivity extends Activity {
 
+    FrameLayout gameContainer;
+    TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
 
         GameBoard gb = new GameBoard(this);
+        gameContainer = (FrameLayout) findViewById(R.id.gameCont);
+        View gameContainer2 = findViewById(R.id.gameCont);
+        textView = (TextView) findViewById(R.id.textView);
 
-        //setContentView(R.layout.activity_game);
-        setContentView(gb);
+        gameContainer.addView(gb);
+
         gb.requestFocus();
     }
 

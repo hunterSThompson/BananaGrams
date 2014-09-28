@@ -27,9 +27,13 @@ public class GameBoard extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
         canvas.drawRect(0, getHeight()/8f, getWidth(), getHeight()*7/8f, backgroundColor);
-
         super.onDraw(canvas);
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
 }
