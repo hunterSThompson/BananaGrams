@@ -13,25 +13,22 @@ import android.widget.TextView;
 public class GameActivity extends Activity {
 
     FrameLayout gameContainer;
-    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        //
+        //  Check intent resume game
+        //
+
         GameBoard gb = new GameBoard(this);
         gameContainer = (FrameLayout) findViewById(R.id.gameCont);
-        View gameContainer2 = findViewById(R.id.gameCont);
-        textView = (TextView) findViewById(R.id.textView);
-
         gameContainer.addView(gb);
 
         gb.requestFocus();
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

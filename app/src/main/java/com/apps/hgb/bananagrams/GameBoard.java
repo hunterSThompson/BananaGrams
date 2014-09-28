@@ -27,7 +27,7 @@ public class GameBoard extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawRect(0, getHeight()/8f, getWidth(), getHeight()*7/8f, backgroundColor);
+        canvas.drawRect(0, 0, getWidth(), getHeight(), backgroundColor);
         super.onDraw(canvas);
     }
 
