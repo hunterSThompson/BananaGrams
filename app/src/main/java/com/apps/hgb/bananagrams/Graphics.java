@@ -22,7 +22,7 @@ public class Graphics {
 
     public void Draw(Canvas canvas, int height, int width)
     {
-        int numSquares = 8;
+        int numSquares = 6;
         float startX, startY, endX, endY = 0f;
 
         for (int i = 1; i < numSquares + 1; i++)

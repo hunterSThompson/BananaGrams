@@ -7,12 +7,13 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 public class GameActivity extends Activity {
 
-    FrameLayout gameContainer;
+    RelativeLayout gameContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class GameActivity extends Activity {
         //
 
         GameBoard gb = new GameBoard(this);
-        gameContainer = (FrameLayout) findViewById(R.id.gameCont);
+        gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
         gameContainer.addView(gb);
 
         gb.requestFocus();
