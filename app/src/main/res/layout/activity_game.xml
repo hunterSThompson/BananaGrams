@@ -19,11 +19,55 @@
         <RelativeLayout
             android:gravity="center"
             android:id="@+id/gameCont"
-            android:layout_width="300dp"
-            android:layout_height="330dp"
+            android:layout_width="280dp"
+            android:layout_height="320dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"></RelativeLayout>
-        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L"
+            android:id="@+id/button"
+            android:layout_alignTop="@+id/gameCont"
+            android:layout_alignBottom="@+id/gameCont"
+            android:layout_toLeftOf="@+id/gameCont"
+            android:layout_toStartOf="@+id/gameCont" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="U"
+            android:id="@+id/button3"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/button"
+            android:layout_toEndOf="@+id/button"
+            android:layout_alignRight="@+id/gameCont"
+            android:layout_alignEnd="@+id/gameCont"
+            android:layout_above="@+id/gameCont" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:id="@+id/button5"
+            android:layout_toEndOf="@+id/gameCont"
+            android:layout_below="@+id/button3"
+            android:layout_alignBottom="@+id/gameCont"
+            android:layout_toRightOf="@+id/gameCont" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D"
+            android:id="@+id/button7"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/gameCont"
+            android:layout_alignEnd="@+id/gameCont"
+            android:layout_toRightOf="@+id/button"
+            android:layout_toEndOf="@+id/button"
+            android:layout_below="@+id/gameCont" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="fill_parent"

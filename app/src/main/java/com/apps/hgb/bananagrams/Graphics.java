@@ -13,17 +13,22 @@ public class Graphics {
     //
     //
     Paint gridColor = new Paint();
+    Paint backgroundColor = new Paint();
 
     public Graphics()
     {
         gridColor.setColor(Color.BLACK);
         gridColor.setStrokeWidth(5f);
+        backgroundColor.setColor(Color.WHITE);
     }
 
     public void Draw(Canvas canvas, int height, int width)
     {
         int numSquares = 6;
         float startX, startY, endX, endY = 0f;
+
+        // Draw background
+        canvas.drawRect(0, 0, width, height, backgroundColor);
 
         for (int i = 1; i < numSquares + 1; i++)
         {

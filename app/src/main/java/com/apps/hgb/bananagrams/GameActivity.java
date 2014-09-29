@@ -1,6 +1,7 @@
 package com.apps.hgb.bananagrams;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,16 @@ public class GameActivity extends Activity {
         GameBoard gb = new GameBoard(this);
         gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
         gameContainer.addView(gb);
+
+        View bottomBorder = new View(this);
+        bottomBorder.setBackgroundColor(Color.BLUE);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 1);
+        //params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        //params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        //params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+
+        gameContainer.addView(bottomBorder, params);
 
         gb.requestFocus();
     }
