@@ -45,10 +45,11 @@ public class GameBoard extends View {
             float endY = getHeight();
             canvas.drawLine(startX, startY, endX, endY, blockColor);
 
-            //startX = startY;
-            //startY= startX;
-            //endX= startY;
-            //startX = startY;
+            startX = 0;
+            startY = getHeight() * i / numSquares;
+            endX = getWidth();
+            endY = getHeight() * i / numSquares;
+            canvas.drawLine(startX, startY, endX, endY, blockColor);
         }
 
         //canvas.drawLine(50, 0, 50, 500, blockColor);
