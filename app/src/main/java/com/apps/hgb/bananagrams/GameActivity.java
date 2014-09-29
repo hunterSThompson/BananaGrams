@@ -29,13 +29,11 @@ public class GameActivity extends Activity {
         gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
         gameContainer.addView(gb);
 
+        // TODO: Finish fixing border issue below. Really really annoying.
         View bottomBorder = new View(this);
         bottomBorder.setBackgroundColor(Color.BLUE);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 1);
-        //params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        //params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        //params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 
         gameContainer.addView(bottomBorder, params);
 

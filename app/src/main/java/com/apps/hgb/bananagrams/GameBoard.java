@@ -15,6 +15,7 @@ public class GameBoard extends View {
 
     GameActivity gameActivity;
     Graphics g;
+    GameData gameData;
 
     public GameBoard(Context context) {
         super(context);
@@ -24,19 +25,22 @@ public class GameBoard extends View {
 
         setFocusable(true);
         setFocusableInTouchMode(true);
-
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-        g.Draw(canvas, getHeight(), getWidth());
+        g.Draw(canvas, getHeight(), getWidth(), gameData);
 
         super.onDraw(canvas);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        float x = event.getX();
+        float y = event.getY();
+
         return super.onTouchEvent(event);
     }
 

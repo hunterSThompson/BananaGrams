@@ -22,7 +22,16 @@ public class Graphics {
         backgroundColor.setColor(Color.WHITE);
     }
 
-    public void Draw(Canvas canvas, int height, int width)
+    public void Draw(Canvas canvas, int height, int width, GameData gameData)
+    {
+        DrawBackground(canvas, height, width);
+    }
+
+    private void DrawLetters(GameData gameData)
+    {
+    }
+
+    private void DrawBackground(Canvas canvas, int height, int width)
     {
         int numSquares = 6;
         float startX, startY, endX, endY = 0f;
@@ -30,6 +39,7 @@ public class Graphics {
         // Draw background
         canvas.drawRect(0, 0, width, height, backgroundColor);
 
+        // Draw Grid Lines
         for (int i = 1; i < numSquares + 1; i++)
         {
             startX = width * i / numSquares;
@@ -44,6 +54,5 @@ public class Graphics {
             endY = height * i / numSquares;
             canvas.drawLine(startX, startY, endX, endY, gridColor);
         }
-
     }
 }
