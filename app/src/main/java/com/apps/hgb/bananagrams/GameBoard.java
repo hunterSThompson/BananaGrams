@@ -24,7 +24,8 @@ public class GameBoard extends View {
         backgroundColor = new Paint();
         blockColor = new Paint();
         backgroundColor.setColor(Color.BLUE);
-        blockColor.setColor(Color.YELLOW);
+        blockColor.setColor(Color.BLACK);
+        blockColor.setStrokeWidth(5f);
 
 
         setFocusable(true);
@@ -35,30 +36,22 @@ public class GameBoard extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-        //canvas.drawRect(0, 0, getWidth(), getHeight(), backgroundColor);
-
-        //
-        canvas.drawRect(0, 0, getWidth()/8f, getHeight()/8f, blockColor);
-
         int numSquares = 8;
         for (int i = 1; i < numSquares + 1; i++)
         {
-            // drawLine(float startX, float startY, float stopX, float stopY, Paint paint)
-            //float startPoint =
-            float startX = getWidth() / numSquares;
-            //float startY = getHeight() / numSquares;
+            float startX = getWidth() * i / numSquares;
             float startY = 0;
-            float endX = getWidth() / numSquares;
+            float endX = getWidth() * i / numSquares;
             float endY = getHeight();
             canvas.drawLine(startX, startY, endX, endY, blockColor);
 
-            //canvas.drawLine(getWidth()/numSquares, 0, getWidth()/numSquares, getHeight(), blockColor);
+            //startX = startY;
+            //startY= startX;
+            //endX= startY;
+            //startX = startY;
         }
 
-        blockColor.setStrokeWidth(5);
-
-        canvas.drawLine(50, 0, 50, 500, blockColor);
+        //canvas.drawLine(50, 0, 50, 500, blockColor);
 
         super.onDraw(canvas);
     }
