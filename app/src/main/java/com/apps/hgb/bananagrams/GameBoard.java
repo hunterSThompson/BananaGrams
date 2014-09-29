@@ -21,10 +21,16 @@ public class GameBoard extends View {
         super(context);
 
         g = new Graphics();
-        this.gameActivity = (GameActivity) context;
+        gameActivity = (GameActivity) context;
 
         setFocusable(true);
         setFocusableInTouchMode(true);
+    }
+
+    //  TODO: Implement continue game constructor
+    public GameBoard(Context context, String savedGameData)
+    {
+        super(context);
     }
 
     @Override
