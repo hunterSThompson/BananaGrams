@@ -10,5 +10,4 @@ public class GameData {
     public ArrayList< ArrayList<String>> wholeGrid;
     public int time;
     public ArrayList<String> tiles;
-
 }
