@@ -37,22 +37,23 @@ public class Graphics {
 
     private void DrawLetters(Canvas canvas, int height, int width)
     {
-        float d = height / 6f * (1/2f);
+        float d1 = height / 6f * (1/2f);
         float d2 = width / 6f * (1/2f);
-        float y = 20f;
+        
+        float x = 20f;
+        float y = 0f;
 
-        float x = 0f;
+        // Draw each letter
         for (int i = 0; i < 6; i++)
         {
-            x = i * height / 6 + d; // Calculate xCords
-            x += 20f; // Offset to account for font size
+            y = i * height / 6 + d1;  // Calculate xCords
+            y += 20f;  // Offset to account for font size
             for (int j = 0; j < 6; j++)
             {
-                y = j * width / 6 + d2;
-                y -= 17f;
-                canvas.drawText("A", y, x, textColor);
+                x = j * width / 6 + d2; // Calculate yCords
+                x -= 17f; // Calculate offset
+                canvas.drawText("A", x, y, textColor);
             }
-            //canvas.drawText("A", y, x, textColor);
         }
     }
 
