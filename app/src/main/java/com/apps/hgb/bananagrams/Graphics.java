@@ -32,7 +32,17 @@ public class Graphics {
         //DrawRects(canvas, height, width);
     }
 
-    private void DrawLetters(GameData gameData) {
+    private void GetVisibleLetters(GameData gameData) {
+        GameTile[][] tilesToDraw = new GameTile[5][5];
+
+        //
+        for (int i = gameData.xStart; i < gameData.xEnd + 1; i++)
+        {
+            for (int j = gameData.yStart; j < gameData.yEnd + 1; j++)
+            {
+                tilesToDraw[i][j] = gameData.gameTiles[i][j];
+            }
+        }
     }
 
     private void DrawLetters(Canvas canvas, int height, int width)

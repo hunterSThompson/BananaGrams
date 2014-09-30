@@ -15,10 +15,12 @@ public class GameData {
     public Range xRange;
     public Range yRange;
 
-    public String serialize()
-    {
-        return "";
-    }
+    public int yStart;
+    public int xStart;
+    public int xEnd;
+    public int yEnd;
+
+
 
     // TODO: Implement GameData constructor.  Should randomly generate tiles
     public GameData()
@@ -30,9 +32,19 @@ public class GameData {
     {
     }
 
+    private GameData(GameTile[][] data)
+    {
+    }
+
     // TODO: Implement deserialze func
-    private GameData deserialize(String data)
+    private GameData Deserialize(String data)
     {
         return null;
+    }
+
+    // TODO: Implement
+    public String Serialize()
+    {
+        return "";
     }
 }
