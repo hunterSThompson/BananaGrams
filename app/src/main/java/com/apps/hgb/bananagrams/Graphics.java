@@ -29,6 +29,7 @@ public class Graphics {
     public void Draw(Canvas canvas, int height, int width, GameData gameData) {
         DrawBackground(canvas, height, width);
         DrawLetters(canvas, height, width);
+        //DrawRects(canvas, height, width);
     }
 
     private void DrawLetters(GameData gameData) {
@@ -37,15 +38,40 @@ public class Graphics {
     private void DrawLetters(Canvas canvas, int height, int width)
     {
         float d = height / 6f * (1/2f);
+        float d2 = width / 6f * (1/2f);
         float y = 20f;
 
         float x = 0f;
         for (int i = 0; i < 6; i++)
         {
             x = i * height / 6 + d; // Calculate xCords
-            x += 20f; // Offset to accont for font size
-            canvas.drawText("A", y, x, textColor);
+            x += 20f; // Offset to account for font size
+            for (int j = 0; j < 6; j++)
+            {
+                y = j * width / 6 + d2;
+                y -= 17f;
+                canvas.drawText("A", y, x, textColor);
+            }
+            //canvas.drawText("A", y, x, textColor);
         }
+    }
+
+    private void DrawRects(Canvas canvas, int height, int width)
+    {
+        float qBX = width * 1 / 6f;
+        float qBY = height * 1 / 6f;
+
+        float left = 0 + qBX * 1 / 4f;
+        float right = 0 + qBX * 3 / 4f;
+        float top = 0 + qBY;
+        float bottom = 0 + qBY * 3 / 4f;
+
+        canvas.drawRect(left, top, right, bottom, textColor);
+
+        for (int i = 0; i < 6; i++)
+        {
+        }
+
     }
 
     private void DrawBackground(Canvas canvas, int height, int width)
