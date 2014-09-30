@@ -27,8 +27,12 @@ public class Graphics {
         textColor.setTextSize(50);
         textColor.setColor(Color.BLUE);
 
-        //fakeGameData = new GameData();
-        //fakeGameData.gameTiles = getTiles();
+        fakeGameData = new GameData();
+        fakeGameData.gameTiles = getTiles();
+        fakeGameData.xStart = 47;
+        fakeGameData.xEnd= 52;
+        fakeGameData.yStart = 47;
+        fakeGameData.yEnd = 52;
     }
 
     // TODO: get rid of this crap
@@ -42,7 +46,7 @@ public class Graphics {
         GameTile gt5 = new GameTile("D", TileStatus.Empty);
         GameTile gt6 = new GameTile("E", TileStatus.Empty);
 
-        GameTile[][] gts = new GameTile[99][99];
+        GameTile[][] gts = new GameTile[100][100];
 
         for (int i = 0; i < 100; i++)
             for (int j = 0; j < 100; j++)
@@ -50,28 +54,95 @@ public class Graphics {
                 gts[i][j] = new GameTile("", TileStatus.Empty);
             }
 
+        int i= 0;
+        int x = i++;
         gts [50][50] = gt2;
         return gts;
     }
 
     public void Draw(Canvas canvas, int height, int width, GameData gameData) {
-        //GameTile[][] tilesToDraw = GetVisibleLetters(fakeGameData);
+        GameTile[][] tilesToDraw = new GameTile[6][6];
+        try
+        {
+            tilesToDraw = GetVisibleLetters(fakeGameData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         DrawBackground(canvas, height, width);
-        DrawLetters(canvas, height, width);
+        DrawLetters(canvas, height, width, tilesToDraw);
+
+        //DrawLetters(canvas, height, width);
         //DrawRects(canvas, height, width);
     }
 
-    private GameTile[][] GetVisibleLetters(GameData gameData) {
-        GameTile[][] tilesToDraw = new GameTile[5][5];
+    private void DrawGameTiles(GameTile[][] gameTiles)
+    {
+    }
 
-        //
-        for (int i = gameData.xStart; i < gameData.xEnd + 1; i++)
+    private void DrawLetters(Canvas canvas, int height, int width, GameTile[][] gameTiles)
+    {
+        float d1 = height / 6f * (1/2f);
+        float d2 = width / 6f * (1/2f);
+
+        float x = 20f;
+        float y = 0f;
+
+        // Draw each letter
+        for (int i = 0; i < 6; i++)
         {
-            for (int j = gameData.yStart; j < gameData.yEnd + 1; j++)
+            y = i * height / 6 + d1;  // Calculate xCords
+            y += 20f;  // Offset to account for font size
+            for (int j = 0; j < 6; j++)
             {
-                tilesToDraw[i][j] = gameData.gameTiles[i][j];
+                x = j * width / 6 + d2; // Calculate yCords
+                x -= 17f; // Calculate offset
+
+                String letter = gameTiles[i][j]._letter;
+
+                canvas.drawText(letter, x, y, textColor);
             }
         }
+    }
+
+
+    private GameTile[][] GetVisibleLetters(GameData gameData) throws Exception {
+        GameTile[][] tilesToDraw = new GameTile[6][6];
+
+        int x = 0;
+        int x1 = 0;
+        x1 = x + x1 + 2;
+
+        int numX = 0;
+        int numY = 0;
+
+        int difX = Math.abs(gameData.xStart - gameData.xEnd);
+        int difY = Math.abs(gameData.yStart - gameData.yEnd);
+        if (difX != 6 || difY != 6)
+        {
+            //throw new Exception("Illegal num of tiles!!!");
+         }
+
+
+        for (int i = gameData.xStart; i < gameData.xEnd; i++)
+        {
+            for (int j = gameData.yStart; j < gameData.yEnd; j++)
+            {
+                if (i == 50 && j == 50)
+                {
+                    int fake = 11111;
+                    fake ++;
+                }
+                GameTile g = gameData.gameTiles[i][j];
+                String let = g._letter;
+                tilesToDraw[numX][numY] = gameData.gameTiles[i][j];
+                numY++;
+            }
+            numX++;
+            numY = 0;
+        }
+
+        int x2 = 5 + x1;
 
         return tilesToDraw;
     }
