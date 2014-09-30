@@ -16,6 +16,8 @@ public class Graphics {
     Paint backgroundColor = new Paint();
     Paint textColor = new Paint();
 
+    GameData fakeGameData = new GameData();
+
     public Graphics() {
         gridColor.setColor(Color.BLACK);
         gridColor.setStrokeWidth(5f);
@@ -24,15 +26,42 @@ public class Graphics {
 
         textColor.setTextSize(50);
         textColor.setColor(Color.BLUE);
+
+        //fakeGameData = new GameData();
+        //fakeGameData.gameTiles = getTiles();
+    }
+
+    // TODO: get rid of this crap
+    private GameTile[][] getTiles()
+    {
+        // TODO: cleanthis up
+        GameTile gt1 = new GameTile("", TileStatus.Empty);
+        GameTile gt2 = new GameTile("A", TileStatus.Neutral);
+        GameTile gt3 = new GameTile("B", TileStatus.Empty);
+        GameTile gt4 = new GameTile("C", TileStatus.Empty);
+        GameTile gt5 = new GameTile("D", TileStatus.Empty);
+        GameTile gt6 = new GameTile("E", TileStatus.Empty);
+
+        GameTile[][] gts = new GameTile[99][99];
+
+        for (int i = 0; i < 100; i++)
+            for (int j = 0; j < 100; j++)
+            {
+                gts[i][j] = new GameTile("", TileStatus.Empty);
+            }
+
+        gts [50][50] = gt2;
+        return gts;
     }
 
     public void Draw(Canvas canvas, int height, int width, GameData gameData) {
+        //GameTile[][] tilesToDraw = GetVisibleLetters(fakeGameData);
         DrawBackground(canvas, height, width);
         DrawLetters(canvas, height, width);
         //DrawRects(canvas, height, width);
     }
 
-    private void GetVisibleLetters(GameData gameData) {
+    private GameTile[][] GetVisibleLetters(GameData gameData) {
         GameTile[][] tilesToDraw = new GameTile[5][5];
 
         //
@@ -43,6 +72,8 @@ public class Graphics {
                 tilesToDraw[i][j] = gameData.gameTiles[i][j];
             }
         }
+
+        return tilesToDraw;
     }
 
     private void DrawLetters(Canvas canvas, int height, int width)
@@ -67,6 +98,7 @@ public class Graphics {
         }
     }
 
+    // NOt using this for now
     private void DrawRects(Canvas canvas, int height, int width)
     {
         float qBX = width * 1 / 6f;
@@ -78,11 +110,6 @@ public class Graphics {
         float bottom = 0 + qBY * 3 / 4f;
 
         canvas.drawRect(left, top, right, bottom, textColor);
-
-        for (int i = 0; i < 6; i++)
-        {
-        }
-
     }
 
     private void DrawBackground(Canvas canvas, int height, int width)
