@@ -76,10 +76,6 @@ public class Graphics {
         //DrawRects(canvas, height, width);
     }
 
-    private void DrawGameTiles(GameTile[][] gameTiles)
-    {
-    }
-
     private void DrawLetters(Canvas canvas, int height, int width, GameTile[][] gameTiles)
     {
         float d1 = height / 6f * (1/2f);
@@ -98,11 +94,19 @@ public class Graphics {
                 x = j * width / 6 + d2; // Calculate yCords
                 x -= 17f; // Calculate offset
 
-                String letter = gameTiles[i][j]._letter;
+
+                GameTile gt = gameTiles[i][j];
+                String letter = "";
+
+                if (gt != null)
+                    letter = gameTiles[i][j]._letter;
 
                 canvas.drawText(letter, x, y, textColor);
             }
         }
+
+        int fake = 123123123;
+        fake++;
     }
 
 
