@@ -25,6 +25,7 @@
             android:layout_centerHorizontal="true"></RelativeLayout>
 
         <Button
+            android:onClick="leftClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="L"
@@ -35,6 +36,7 @@
             android:layout_toStartOf="@+id/gameCont" />
 
         <Button
+            android:onClick="upClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="U"
@@ -47,6 +49,7 @@
             android:layout_above="@+id/gameCont" />
 
         <Button
+            android:onClick="rightClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R"
@@ -57,6 +60,7 @@
             android:layout_toRightOf="@+id/gameCont" />
 
         <Button
+            android:onClick="downClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="D"

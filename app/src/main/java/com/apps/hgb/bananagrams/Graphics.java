@@ -30,7 +30,8 @@ public class Graphics {
         // Set paint colors
         gridColor.setColor(Color.WHITE);
         gridColor.setStrokeWidth(5f);
-        backgroundColor.setColor(Color.GRAY);
+        backgroundColor.setColor(Color.BLUE);
+        backgroundColor.setAlpha(10);
         textColor.setTextSize(50);
         textColor.setColor(Color.BLACK);
 

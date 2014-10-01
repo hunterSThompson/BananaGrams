@@ -40,6 +40,22 @@ public class GameActivity extends Activity {
         gb.requestFocus();
     }
 
+    public void rightClick(View v)
+    {
+    }
+
+    public void leftClick(View v)
+    {
+    }
+
+    public void upClick(View v)
+    {
+    }
+
+    public void downClick(View v)
+    {
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
