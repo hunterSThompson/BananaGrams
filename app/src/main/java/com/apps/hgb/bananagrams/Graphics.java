@@ -19,6 +19,7 @@ public class Graphics {
     GameData fakeGameData = new GameData();
 
     public Graphics() {
+
         gridColor.setColor(Color.BLACK);
         gridColor.setStrokeWidth(5f);
 
@@ -62,18 +63,13 @@ public class Graphics {
 
     public void Draw(Canvas canvas, int height, int width, GameData gameData) {
         DrawBackground(canvas, height, width);
-        DrawLetters(canvas, height, width, gameData);
+        DrawLetters(canvas, height, width, fakeGameData);
     }
 
     private void DrawLetters(Canvas canvas, int height, int width, GameData gameData)
     {
         GameTile[][] gameTiles = new GameTile[6][6];
-        try {
-            gameTiles = gameData.GetVisibleLetters();
-        }
-        catch (Exception e)
-        {
-        }
+        gameTiles = gameData.GetVisibleLetters();
 
         float d1 = height / 6f * (1/2f);
         float d2 = width / 6f * (1/2f);
@@ -86,10 +82,11 @@ public class Graphics {
         {
             y = i * height / 6 + d1;  // Calculate xCords
             y += 20f;  // Offset to account for font size
+
             for (int j = 0; j < 6; j++)
             {
                 x = j * width / 6 + d2; // Calculate yCords
-                x -= 17f; // Calculate offset
+                x -= 17f; // Calculate offset TODO: Change this to width of text / 2
 
 
                 GameTile gt = gameTiles[i][j];

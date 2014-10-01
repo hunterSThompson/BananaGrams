@@ -20,21 +20,20 @@ public class GameData {
     public int xEnd;
     public int yEnd;
 
-    public GameTile[][] GetVisibleLetters() throws Exception {
-        GameTile[][] tilesToDraw = new GameTile[6][6];
+    public GameTile[][] GetVisibleLetters() {
 
-        int x = 0;
-        int x1 = 0;
-        x1 = x + x1 + 2;
+        GameTile[][] tilesToDraw = new GameTile[6][6];
 
         int numX = 0;
         int numY = 0;
 
         int difX = Math.abs(this.xStart - this.xEnd);
         int difY = Math.abs(this.yStart - this.yEnd);
-        if (difX != 6 || difY != 6)
+
+        if (difX != 5 || difY != 5)
         {
-            throw new Exception("Illegal num of tiles!!!");
+            // The app should crash if our view frame isn't the right num of things...
+            // that would be very bad...
         }
 
         GameTile g;
@@ -50,8 +49,6 @@ public class GameData {
             numX++;
             numY = 0;
         }
-
-        int x2 = 5 + x1;
 
         return tilesToDraw;
     }
