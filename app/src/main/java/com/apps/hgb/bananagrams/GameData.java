@@ -20,6 +20,41 @@ public class GameData {
     public int xEnd;
     public int yEnd;
 
+    public GameTile[][] GetVisibleLetters() throws Exception {
+        GameTile[][] tilesToDraw = new GameTile[6][6];
+
+        int x = 0;
+        int x1 = 0;
+        x1 = x + x1 + 2;
+
+        int numX = 0;
+        int numY = 0;
+
+        int difX = Math.abs(this.xStart - this.xEnd);
+        int difY = Math.abs(this.yStart - this.yEnd);
+        if (difX != 6 || difY != 6)
+        {
+            throw new Exception("Illegal num of tiles!!!");
+        }
+
+        GameTile g;
+        for (int i = this.xStart; i < this.xEnd; i++)
+        {
+            for (int j = this.yStart; j < this.yEnd; j++)
+            {
+                g = this.gameTiles[i][j];
+                String let = g._letter;
+                tilesToDraw[numX][numY] = this.gameTiles[i][j];
+                numY++;
+            }
+            numX++;
+            numY = 0;
+        }
+
+        int x2 = 5 + x1;
+
+        return tilesToDraw;
+    }
 
 
     // TODO: Implement GameData constructor.  Should randomly generate tiles

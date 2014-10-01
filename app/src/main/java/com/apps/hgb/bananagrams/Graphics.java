@@ -61,23 +61,20 @@ public class Graphics {
     }
 
     public void Draw(Canvas canvas, int height, int width, GameData gameData) {
-        GameTile[][] tilesToDraw = new GameTile[6][6];
-        try
-        {
-            tilesToDraw = GetVisibleLetters(fakeGameData);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         DrawBackground(canvas, height, width);
-        DrawLetters(canvas, height, width, tilesToDraw);
-
-        //DrawLetters(canvas, height, width);
-        //DrawRects(canvas, height, width);
+        DrawLetters(canvas, height, width, gameData);
     }
 
-    private void DrawLetters(Canvas canvas, int height, int width, GameTile[][] gameTiles)
+    private void DrawLetters(Canvas canvas, int height, int width, GameData gameData)
     {
+        GameTile[][] gameTiles = new GameTile[6][6];
+        try {
+            gameTiles = gameData.GetVisibleLetters();
+        }
+        catch (Exception e)
+        {
+        }
+
         float d1 = height / 6f * (1/2f);
         float d2 = width / 6f * (1/2f);
 
@@ -104,53 +101,36 @@ public class Graphics {
                 canvas.drawText(letter, x, y, textColor);
             }
         }
-
-        int fake = 123123123;
-        fake++;
     }
 
+    private void DrawBackground(Canvas canvas, int height, int width)
+    {
+        int numSquares = 6;
+        float startX, startY, endX, endY = 0f;
 
-    private GameTile[][] GetVisibleLetters(GameData gameData) throws Exception {
-        GameTile[][] tilesToDraw = new GameTile[6][6];
+        // Draw background
+        canvas.drawRect(0, 0, width, height, backgroundColor);
 
-        int x = 0;
-        int x1 = 0;
-        x1 = x + x1 + 2;
-
-        int numX = 0;
-        int numY = 0;
-
-        int difX = Math.abs(gameData.xStart - gameData.xEnd);
-        int difY = Math.abs(gameData.yStart - gameData.yEnd);
-        if (difX != 6 || difY != 6)
+        // Draw Grid Lines
+        for (int i = 1; i < numSquares + 1; i++)
         {
-            //throw new Exception("Illegal num of tiles!!!");
-         }
+            startX = width * i / numSquares;
+            startY = 0;
+            endX = width * i / numSquares;
+            endY = height;
+            canvas.drawLine(startX, startY, endX, endY, gridColor);
 
-
-        for (int i = gameData.xStart; i < gameData.xEnd; i++)
-        {
-            for (int j = gameData.yStart; j < gameData.yEnd; j++)
-            {
-                if (i == 50 && j == 50)
-                {
-                    int fake = 11111;
-                    fake ++;
-                }
-                GameTile g = gameData.gameTiles[i][j];
-                String let = g._letter;
-                tilesToDraw[numX][numY] = gameData.gameTiles[i][j];
-                numY++;
-            }
-            numX++;
-            numY = 0;
+            startX = 0;
+            startY = height * i / numSquares;
+            endX = width;
+            endY = height * i / numSquares;
+            canvas.drawLine(startX, startY, endX, endY, gridColor);
         }
-
-        int x2 = 5 + x1;
-
-        return tilesToDraw;
     }
 
+    //
+    // No longer using this
+    //
     private void DrawLetters(Canvas canvas, int height, int width)
     {
         float d1 = height / 6f * (1/2f);
@@ -187,28 +167,5 @@ public class Graphics {
         canvas.drawRect(left, top, right, bottom, textColor);
     }
 
-    private void DrawBackground(Canvas canvas, int height, int width)
-    {
-        int numSquares = 6;
-        float startX, startY, endX, endY = 0f;
 
-        // Draw background
-        canvas.drawRect(0, 0, width, height, backgroundColor);
-
-        // Draw Grid Lines
-        for (int i = 1; i < numSquares + 1; i++)
-        {
-            startX = width * i / numSquares;
-            startY = 0;
-            endX = width * i / numSquares;
-            endY = height;
-            canvas.drawLine(startX, startY, endX, endY, gridColor);
-
-            startX = 0;
-            startY = height * i / numSquares;
-            endX = width;
-            endY = height * i / numSquares;
-            canvas.drawLine(startX, startY, endX, endY, gridColor);
-        }
-    }
 }
