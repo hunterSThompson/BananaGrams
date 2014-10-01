@@ -10,26 +10,35 @@ import android.graphics.Paint;
 public class Graphics {
 
     //
-    //
+    //  Paints
     //
     Paint gridColor = new Paint();
     Paint backgroundColor = new Paint();
     Paint textColor = new Paint();
 
+    //
+    //  Fake game data member for dev
+    //
     GameData fakeGameData = new GameData();
 
     public Graphics() {
+        InitializeGraphics();
+    }
 
+    private void InitializeGraphics()
+    {
+        // Set paint colors
         gridColor.setColor(Color.BLACK);
         gridColor.setStrokeWidth(5f);
-
         backgroundColor.setColor(Color.WHITE);
-
         textColor.setTextSize(50);
         textColor.setColor(Color.BLUE);
 
+        // Create fake game data
         fakeGameData = new GameData();
         fakeGameData.gameTiles = getTiles();
+
+        // Initialize view frame
         fakeGameData.xStart = 47;
         fakeGameData.xEnd= 52;
         fakeGameData.yStart = 47;
