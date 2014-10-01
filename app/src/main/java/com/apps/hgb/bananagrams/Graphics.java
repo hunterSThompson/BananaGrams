@@ -28,11 +28,11 @@ public class Graphics {
     private void InitializeGraphics()
     {
         // Set paint colors
-        gridColor.setColor(Color.BLACK);
+        gridColor.setColor(Color.WHITE);
         gridColor.setStrokeWidth(5f);
-        backgroundColor.setColor(Color.WHITE);
+        backgroundColor.setColor(Color.GRAY);
         textColor.setTextSize(50);
-        textColor.setColor(Color.BLUE);
+        textColor.setColor(Color.BLACK);
 
         // Create fake game data
         fakeGameData = new GameData();
@@ -45,7 +45,7 @@ public class Graphics {
         fakeGameData.yEnd = 52;
     }
 
-    // TODO: get rid of this crap
+    // TODO: get rid of this after done testing
     private GameTile[][] getTiles()
     {
         // TODO: cleanthis up
@@ -58,15 +58,19 @@ public class Graphics {
 
         GameTile[][] gts = new GameTile[100][100];
 
-        for (int i = 0; i < 100; i++)
-            for (int j = 0; j < 100; j++)
-            {
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 100; j++) {
                 gts[i][j] = new GameTile("", TileStatus.Empty);
             }
+        }
 
         int i= 0;
         int x = i++;
         gts [50][50] = gt2;
+        gts [49][49] = gt2;
+        gts [50][48] = gt2;
+        gts [48][50] = gt2;
+        gts [51][50] = gt2;
         return gts;
     }
 
