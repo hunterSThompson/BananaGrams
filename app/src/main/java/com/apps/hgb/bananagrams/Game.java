@@ -1,6 +1,7 @@
 package com.apps.hgb.bananagrams;
 
 import android.graphics.Color;
+import android.graphics.Point;
 
 /**
  * Created by Hunt on 9/28/2014.
@@ -35,13 +36,10 @@ public class Game {
             // that would be very bad...
         }
 
-        GameTile g;
         for (int i = this.xStart; i < this.xEnd; i++)
         {
             for (int j = this.yStart; j < this.yEnd; j++)
             {
-                g = this.gameTiles[i][j];
-                String let = g._letter;
                 tilesToDraw[numX][numY] = this.gameTiles[i][j];
                 numY++;
             }
@@ -60,10 +58,6 @@ public class Game {
 
     // TODO: Implement resume game constructor.  Should call deserialize function.
     public Game(String data)
-    {
-    }
-
-    public void MovementButtonClick(Direction direction)
     {
     }
 
@@ -133,6 +127,10 @@ public class Game {
         yEnd += 1;
     }
 
+    public void BoardClick(float x, float y, float height, float width)
+    {
+        Utilities.GetTouchedTile(x, y, this, height, width);
+    }
 
     // TODO: Implement deserialze func
     private Game Deserialize(String data)
