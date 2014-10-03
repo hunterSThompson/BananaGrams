@@ -110,26 +110,26 @@ public class Game {
 
     public void MoveUp()
     {
-        yStart += 1;
-        yEnd += 1;
+        xStart += 1;
+        xEnd += 1;
     }
 
     public void MoveDown()
+    {
+        xStart -= 1;
+        xEnd -= 1;
+    }
+
+    public void MoveRight()
     {
         yStart -= 1;
         yEnd -= 1;
     }
 
-    public void MoveRight()
-    {
-        xStart += 1;
-        xEnd += 1;
-    }
-
     public void MoveLeft()
     {
-        xStart -= 1;
-        xEnd -= 1;
+        yStart += 1;
+        yEnd += 1;
     }
 
 
