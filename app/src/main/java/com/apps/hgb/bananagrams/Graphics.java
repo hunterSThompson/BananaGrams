@@ -19,7 +19,7 @@ public class Graphics {
     //
     //  Fake game data member for dev
     //
-    GameData fakeGameData = new GameData();
+    Game fakeGame = new Game();
 
     public Graphics() {
         InitializeGraphics();
@@ -36,18 +36,18 @@ public class Graphics {
         textColor.setColor(Color.BLACK);
 
         // Create fake game data
-        fakeGameData = new GameData();
-        fakeGameData.gameTiles = getTiles();
+        fakeGame = new Game();
+        fakeGame.gameTiles = getTiles();
 
         // Initialize view frame
-        fakeGameData.xStart = 47;
-        fakeGameData.xEnd= 52;
-        fakeGameData.yStart = 47;
-        fakeGameData.yEnd = 52;
+        fakeGame.xStart = 47;
+        fakeGame.xEnd= 52;
+        fakeGame.yStart = 47;
+        fakeGame.yEnd = 52;
     }
 
     // TODO: get rid of this after done testing
-    private GameTile[][] getTiles()
+    public GameTile[][] getTiles()
     {
         // TODO: cleanthis up
         GameTile gt1 = new GameTile("", TileStatus.Empty);
@@ -75,15 +75,15 @@ public class Graphics {
         return gts;
     }
 
-    public void Draw(Canvas canvas, int height, int width, GameData gameData) {
+    public void Draw(Canvas canvas, int height, int width, Game game) {
         DrawBackground(canvas, height, width);
-        DrawLetters(canvas, height, width, fakeGameData);
+        DrawLetters(canvas, height, width, game);
     }
 
-    private void DrawLetters(Canvas canvas, int height, int width, GameData gameData)
+    private void DrawLetters(Canvas canvas, int height, int width, Game game)
     {
         GameTile[][] gameTiles = new GameTile[6][6];
-        gameTiles = gameData.GetVisibleLetters();
+        gameTiles = game.GetVisibleLetters();
 
         float d1 = height / 6f * (1/2f);
         float d2 = width / 6f * (1/2f);

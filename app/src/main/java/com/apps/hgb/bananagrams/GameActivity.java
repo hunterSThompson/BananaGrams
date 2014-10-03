@@ -15,19 +15,23 @@ import android.widget.TextView;
 public class GameActivity extends Activity {
 
     RelativeLayout gameContainer;
+    Game game;
+    GameBoard gameBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        //
-        //  Check intent resume game
-        //
+        //  TODO: Check intent resume game
+        // if Intent == newGame
+        game = new Game();
+        // else
+        // game = new Game(savedData);
 
-        GameBoard gb = new GameBoard(this);
+        gameBoard = new GameBoard(this, game);
         gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
-        gameContainer.addView(gb);
+        gameContainer.addView(gameBoard);
 
         // TODO: Finish fixing border issue below. Really really annoying.
         View bottomBorder = new View(this);
@@ -37,23 +41,31 @@ public class GameActivity extends Activity {
 
         gameContainer.addView(bottomBorder, params);
 
-        gb.requestFocus();
+        gameBoard.requestFocus();
     }
 
     public void rightClick(View v)
     {
+        game.MoveRight();
+        gameBoard.invalidate();
     }
 
     public void leftClick(View v)
     {
+        game.MoveLeft();
+        gameBoard.invalidate();
     }
 
     public void upClick(View v)
     {
+        game.MoveUp();
+        gameBoard.invalidate();
     }
 
     public void downClick(View v)
     {
+        game.MoveDown();
+        gameBoard.invalidate();
     }
 
     @Override

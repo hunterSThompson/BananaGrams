@@ -2,9 +2,6 @@ package com.apps.hgb.bananagrams;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -15,16 +12,23 @@ public class GameBoard extends View {
 
     GameActivity gameActivity;
     Graphics g;
-    GameData gameData;
+    Game game;
 
-    public GameBoard(Context context) {
+    public GameBoard(Context context, Game _game) {
         super(context);
 
         g = new Graphics();
         gameActivity = (GameActivity) context;
 
+        game = _game;
+
         setFocusable(true);
         setFocusableInTouchMode(true);
+    }
+
+    public void Invalidate()
+    {
+        Invalidate();
     }
 
     //  TODO: Implement continue game constructor
@@ -36,7 +40,7 @@ public class GameBoard extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        g.Draw(canvas, getHeight(), getWidth(), gameData);
+        g.Draw(canvas, getHeight(), getWidth(), game);
 
         super.onDraw(canvas);
     }

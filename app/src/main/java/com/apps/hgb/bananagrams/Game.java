@@ -1,0 +1,152 @@
+package com.apps.hgb.bananagrams;
+
+import android.graphics.Color;
+
+/**
+ * Created by Hunt on 9/28/2014.
+ */
+public class Game {
+
+    public GameTile[][] gameTiles = new GameTile[100][100];
+
+    public String[] selectableTiles = new String[50];
+
+    public Range xRange;
+    public Range yRange;
+
+    public int yStart;
+    public int xStart;
+    public int xEnd;
+    public int yEnd;
+
+    public GameTile[][] GetVisibleLetters() {
+
+        GameTile[][] tilesToDraw = new GameTile[6][6];
+
+        int numX = 0;
+        int numY = 0;
+
+        int difX = Math.abs(this.xStart - this.xEnd);
+        int difY = Math.abs(this.yStart - this.yEnd);
+
+        if (difX != 5 || difY != 5)
+        {
+            // TODO: The app should crash if our view frame isn't the right num of things...
+            // that would be very bad...
+        }
+
+        GameTile g;
+        for (int i = this.xStart; i < this.xEnd; i++)
+        {
+            for (int j = this.yStart; j < this.yEnd; j++)
+            {
+                g = this.gameTiles[i][j];
+                String let = g._letter;
+                tilesToDraw[numX][numY] = this.gameTiles[i][j];
+                numY++;
+            }
+            numX++;
+            numY = 0;
+        }
+
+        return tilesToDraw;
+    }
+
+    // TODO: Implement Game constructor.  Should randomly generate tiles
+    public Game()
+    {
+        InitializeGraphics();
+    }
+
+    // TODO: Implement resume game constructor.  Should call deserialize function.
+    public Game(String data)
+    {
+    }
+
+    public void MovementButtonClick(Direction direction)
+    {
+    }
+
+    private void InitializeGraphics()
+    {
+        // Create fake game data
+        gameTiles = getTiles();
+
+        // Initialize view frame
+        this.xStart = 47;
+        this.xEnd= 52;
+        this.yStart = 47;
+        this.yEnd = 52;
+    }
+
+    // TODO: get rid of this after done testing
+    public GameTile[][] getTiles()
+    {
+        // TODO: cleanthis up
+        GameTile gt1 = new GameTile("", TileStatus.Empty);
+        GameTile gt2 = new GameTile("A", TileStatus.Neutral);
+        GameTile gt3 = new GameTile("B", TileStatus.Empty);
+        GameTile gt4 = new GameTile("C", TileStatus.Empty);
+        GameTile gt5 = new GameTile("D", TileStatus.Empty);
+        GameTile gt6 = new GameTile("E", TileStatus.Empty);
+
+        GameTile[][] gts = new GameTile[100][100];
+
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 100; j++) {
+                gts[i][j] = new GameTile("", TileStatus.Empty);
+            }
+        }
+
+        int i= 0;
+        int x = i++;
+        gts [50][50] = gt2;
+        gts [49][49] = gt2;
+        gts [50][48] = gt2;
+        gts [48][50] = gt2;
+        gts [51][50] = gt2;
+        return gts;
+    }
+
+    public void MoveUp()
+    {
+        yStart += 1;
+        yEnd += 1;
+    }
+
+    public void MoveDown()
+    {
+        yStart -= 1;
+        yEnd -= 1;
+    }
+
+    public void MoveRight()
+    {
+        xStart += 1;
+        xEnd += 1;
+    }
+
+    public void MoveLeft()
+    {
+        xStart -= 1;
+        xEnd -= 1;
+    }
+
+
+    // TODO: Implement deserialze func
+    private Game Deserialize(String data)
+    {
+        return null;
+    }
+
+    // TODO: Implement
+    private String Serialize()
+    {
+        return "";
+    }
+
+    public boolean GameOver()
+    {
+        return false;
+    }
+}
