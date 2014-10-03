@@ -74,20 +74,21 @@ public class Game {
 
         // Initialize view frame
         this.xStart = 47;
-        this.xEnd= 52;
+        this.xEnd= 53;
         this.yStart = 47;
-        this.yEnd = 52;
+        this.yEnd = 53;
     }
 
     // TODO: get rid of this after done testing
     public GameTile[][] getTiles()
     {
         // TODO: cleanthis up
+
         GameTile gt1 = new GameTile("", TileStatus.Empty);
-        GameTile gt2 = new GameTile("A", TileStatus.Neutral);
-        GameTile gt3 = new GameTile("B", TileStatus.Empty);
-        GameTile gt4 = new GameTile("C", TileStatus.Empty);
-        GameTile gt5 = new GameTile("D", TileStatus.Empty);
+        GameTile gt2 = new GameTile("H", TileStatus.Neutral);
+        GameTile gt3 = new GameTile("U", TileStatus.Empty);
+        GameTile gt4 = new GameTile("N", TileStatus.Empty);
+        GameTile gt5 = new GameTile("T", TileStatus.Empty);
         GameTile gt6 = new GameTile("E", TileStatus.Empty);
 
         GameTile[][] gts = new GameTile[100][100];
@@ -101,10 +102,10 @@ public class Game {
         int i= 0;
         int x = i++;
         gts [50][50] = gt2;
-        gts [49][49] = gt2;
-        gts [50][48] = gt2;
-        gts [48][50] = gt2;
-        gts [51][50] = gt2;
+        //gts [49][49] = gt2;
+        //gts [50][48] = gt2;
+        //gts [48][50] = gt2;
+        //gts [51][50] = gt2;
         return gts;
     }
 
