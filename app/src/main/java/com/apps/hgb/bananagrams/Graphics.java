@@ -117,6 +117,36 @@ public class Graphics {
         }
     }
 
+    //
+    //  TODO:  Implement code here to just draw the stupid rectangles with drawRect. What was I thinking with grid lines
+    //
+    private void DrawLetters2(Canvas canvas, int height, int width, Game game)
+    {
+        GameTile[][] gameTiles = new GameTile[6][6];
+        gameTiles = game.GetVisibleLetters();
+
+        float d1 = height / 6f * (1/2f);
+        float d2 = width / 6f * (1/2f);
+
+        float x = 20f;
+        float y = 0f;
+
+        // Draw each letter
+        for (int i = 0; i < 6; i++)
+        {
+            y = i * height / 6 + d1;  // Calculate xCords
+            y += 20f;  // Offset to account for font size
+
+            for (int j = 0; j < 6; j++)
+            {
+                x = j * width / 6 + d2; // Calculate yCords
+                x -= 17f; // Calculate offset TODO: Change this to width of text / 2
+
+                Draw(canvas, x, y, gameTiles[i][j]);
+            }
+        }
+    }
+
     private void Draw(Canvas c, float x, float y, GameTile gameTile)
     {
         if (gameTile == null)

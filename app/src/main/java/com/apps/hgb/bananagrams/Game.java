@@ -156,7 +156,7 @@ public class Game {
             for (int j = 0; j < gameTiles[i].length; j++)
             {
                 if (gameTiles[i][j] == tileToRemove)
-                    gameTiles[i][j].setToEmpty();
+                    gameTiles[i][j].SetToEmpty();
             }
         }
     }
