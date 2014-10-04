@@ -11,6 +11,7 @@ public class GameTile {
         tileStatus = _tileStatus;
     }
 
+
     public String _letter;
     public TileStatus tileStatus;
 }

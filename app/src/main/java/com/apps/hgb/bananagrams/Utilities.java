@@ -10,8 +10,15 @@ public final class Utilities {
         return true;
     }
 
+    static GameTile GetTouchedTile2(float x, float y, Game game, float height, float width)
+    {
+        int xf = game.xStart + (int) (x / width / 6);
+        int yf = game.yStart + (int) (y / height / 6);
+        GameTile gt = game.gameTiles[xf][yf];
+        return game.gameTiles[xf][yf];
+    }
+
     static GameTile GetTouchedTile(float x, float y, Game game, float height, float width)
-    //static GameTile GetTouchedTile(float x, float y, Game game)
     {
         float cellWidth = width / 6;
         float cellHeight = height / 6;
@@ -19,20 +26,13 @@ public final class Utilities {
         float tileX = x / cellWidth;
         float tileY = y / cellHeight;
 
-        //float tileX = x / 6;
-        //float tileY = y / 6;
-
         int xTileNum = (int) tileX;
         int yTileNum = (int) tileY;
-
-        // Convert to index
 
         int xf = xTileNum + game.xStart;
         int yf = yTileNum + game.yStart;
 
-        GameTile gt = game.gameTiles[xf][yf];
-
-
+        // TODO:  Throw error here
         if ((xf | yf) > 100)
         {
         }
@@ -40,6 +40,7 @@ public final class Utilities {
         {
         }
 
+        GameTile gt = game.gameTiles[xf][yf];
         return game.gameTiles[xf][yf];
     }
 }

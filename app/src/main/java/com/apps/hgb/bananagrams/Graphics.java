@@ -15,6 +15,8 @@ public class Graphics {
     Paint gridColor = new Paint();
     Paint backgroundColor = new Paint();
     Paint textColor = new Paint();
+    Paint selectedTileGreen = new Paint();
+    Paint selectedTileRed = new Paint();
 
     //
     //  Fake game data member for dev
@@ -30,10 +32,18 @@ public class Graphics {
         // Set paint colors
         gridColor.setColor(Color.WHITE);
         gridColor.setStrokeWidth(5f);
+
         backgroundColor.setColor(Color.BLUE);
         backgroundColor.setAlpha(10);
+
         textColor.setTextSize(50);
         textColor.setColor(Color.BLACK);
+
+        selectedTileGreen.setColor(Color.GREEN);
+        selectedTileGreen.setTextSize(50);
+
+        selectedTileGreen.setColor(Color.RED);
+        selectedTileGreen.setTextSize(50);
 
         // Create fake game data
         fakeGame = new Game();
@@ -102,17 +112,49 @@ public class Graphics {
                 x = j * width / 6 + d2; // Calculate yCords
                 x -= 17f; // Calculate offset TODO: Change this to width of text / 2
 
+                Draw(canvas, x, y, gameTiles[i][j]);
 
+                /*
                 GameTile gt = gameTiles[i][j];
                 String letter = "";
 
-                if (gt != null)
+                if (gt != null) {
                     letter = gameTiles[i][j]._letter;
+                }
 
                 canvas.drawText(letter, x, y, textColor);
+                */
             }
         }
     }
+
+    private void Draw(Canvas c, float x, float y, GameTile gameTile)
+    {
+        if (gameTile == null)
+            return;
+
+        String letter = gameTile._letter;
+        TileStatus ts = gameTile.tileStatus;
+
+        Paint colorToPaint = null;
+
+        switch (ts) {
+            case Empty:
+                return;
+            case Neutral:
+                colorToPaint = textColor;
+                break;
+            case SelectedGreen:
+                colorToPaint = selectedTileGreen;
+                break;
+            case SelectedRed:
+                //colorToPain
+                return;
+        };
+
+        c.drawText(letter, x, y, colorToPaint);
+    }
+
 
     private void DrawBackground(Canvas canvas, int height, int width)
     {
