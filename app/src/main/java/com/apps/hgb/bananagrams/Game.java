@@ -79,7 +79,7 @@ public class Game {
         // TODO: cleanthis up
 
         GameTile gt1 = new GameTile("", TileStatus.Empty);
-        GameTile gt2 = new GameTile("H", TileStatus.SelectedRed);
+        GameTile gt2 = new GameTile("H", TileStatus.Neutral);
         GameTile gt3 = new GameTile("U", TileStatus.Empty);
         GameTile gt4 = new GameTile("N", TileStatus.Empty);
         GameTile gt5 = new GameTile("T", TileStatus.Empty);
@@ -96,10 +96,6 @@ public class Game {
         int i= 0;
         int x = i++;
         gts [50][50] = gt2;
-        //gts [49][49] = gt2;
-        //gts [50][48] = gt2;
-        //gts [48][50] = gt2;
-        //gts [51][50] = gt2;
         return gts;
     }
 
@@ -134,6 +130,7 @@ public class Game {
         switch (touchedTile.tileStatus) {
             case Empty:
                 unHighlightAll();
+                touchedTile.Touch();
                 return;
             case Neutral:
                 unHighlightAll();
@@ -150,7 +147,7 @@ public class Game {
     }
 
     //
-    //  TODO:  Refactor array to ArrayList later.  Or return coords where removed tile is. This is sloppy.
+    //  TODO:  Refactor array to ArrayList later.  Or return coordinates where removed tile is. This is sloppy.
     //
     private void DeleteTile(GameTile tileToRemove)
     {
@@ -168,7 +165,7 @@ public class Game {
     {
     }
 
-    // TODO: Implement deserialze func
+    // TODO: Implement
     private Game Deserialize(String data)
     {
         return null;

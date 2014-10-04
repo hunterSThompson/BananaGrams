@@ -16,13 +16,14 @@ public class GameTile {
         switch (tileStatus) {
             // Should never happen
             case Empty:
+                tileStatus = TileStatus.SelectedGreen;
                 return;
             case Neutral:
-                tileStatus = tileStatus.SelectedGreen;
-                break;
+                tileStatus = TileStatus.SelectedGreen;
+                return;
             case SelectedGreen:
-                tileStatus = tileStatus.SelectedRed;
-                break;
+                tileStatus = TileStatus.SelectedRed;
+                return;
             // Should never happen
             case SelectedRed:
                 return;
