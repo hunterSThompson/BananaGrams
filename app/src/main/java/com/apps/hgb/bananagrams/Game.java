@@ -79,7 +79,7 @@ public class Game {
         // TODO: cleanthis up
 
         GameTile gt1 = new GameTile("", TileStatus.Empty);
-        GameTile gt2 = new GameTile("H", TileStatus.SelectedGreen);
+        GameTile gt2 = new GameTile("H", TileStatus.SelectedRed);
         GameTile gt3 = new GameTile("U", TileStatus.Empty);
         GameTile gt4 = new GameTile("N", TileStatus.Empty);
         GameTile gt5 = new GameTile("T", TileStatus.Empty);
@@ -103,6 +103,7 @@ public class Game {
         return gts;
     }
 
+    // TODO: Change these to one method with switch later
     public void MoveUp()
     {
         xStart += 1;
@@ -129,8 +130,42 @@ public class Game {
 
     public void BoardClick(float x, float y, float height, float width)
     {
-        Utilities.GetTouchedTile(x, y, this, height, width);
-        Utilities.GetTouchedTile2(x, y, this, height, width);
+        GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
+        switch (touchedTile.tileStatus) {
+            case Empty:
+                unHighlightAll();
+                return;
+            case Neutral:
+                unHighlightAll();
+                touchedTile.Touch();
+                break;
+            case SelectedGreen:
+                touchedTile.Touch();
+                break;
+            case SelectedRed:
+                DeleteTile(touchedTile);
+                return;
+        };
+        //Utilities.GetTouchedTile2(x, y, this, height, width);
+    }
+
+    //
+    //  TODO:  Refactor array to ArrayList later.  Or return coords where removed tile is. This is sloppy.
+    //
+    private void DeleteTile(GameTile tileToRemove)
+    {
+        for (int i = 0; i < gameTiles.length; i++)
+        {
+            for (int j = 0; j < gameTiles[i].length; j++)
+            {
+                if (gameTiles[i][j] == tileToRemove)
+                    gameTiles[i][j].setToEmpty();
+            }
+        }
+    }
+
+    private void unHighlightAll()
+    {
     }
 
     // TODO: Implement deserialze func

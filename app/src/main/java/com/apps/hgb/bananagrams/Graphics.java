@@ -42,8 +42,8 @@ public class Graphics {
         selectedTileGreen.setColor(Color.GREEN);
         selectedTileGreen.setTextSize(50);
 
-        selectedTileGreen.setColor(Color.RED);
-        selectedTileGreen.setTextSize(50);
+        selectedTileRed.setColor(Color.RED);
+        selectedTileRed.setTextSize(50);
 
         // Create fake game data
         fakeGame = new Game();
@@ -113,17 +113,6 @@ public class Graphics {
                 x -= 17f; // Calculate offset TODO: Change this to width of text / 2
 
                 Draw(canvas, x, y, gameTiles[i][j]);
-
-                /*
-                GameTile gt = gameTiles[i][j];
-                String letter = "";
-
-                if (gt != null) {
-                    letter = gameTiles[i][j]._letter;
-                }
-
-                canvas.drawText(letter, x, y, textColor);
-                */
             }
         }
     }
@@ -148,8 +137,8 @@ public class Graphics {
                 colorToPaint = selectedTileGreen;
                 break;
             case SelectedRed:
-                //colorToPain
-                return;
+                colorToPaint = selectedTileRed;
+                break;
         };
 
         c.drawText(letter, x, y, colorToPaint);

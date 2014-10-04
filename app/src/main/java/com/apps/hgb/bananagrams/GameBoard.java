@@ -52,6 +52,7 @@ public class GameBoard extends View {
         float y = event.getY();
 
         game.BoardClick(x, y, getHeight(), getWidth());
+        invalidate();
 
         return super.onTouchEvent(event);
     }
