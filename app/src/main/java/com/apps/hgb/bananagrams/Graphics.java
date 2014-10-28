@@ -19,6 +19,8 @@ public class Graphics {
     Paint textColor = new Paint();
     Paint selectedTileGreen = new Paint();
     Paint selectedTileRed = new Paint();
+    Paint blue = new Paint();
+    Paint yellow = new Paint();
 
     //
     //  Fake game data member for dev
@@ -47,6 +49,9 @@ public class Graphics {
         selectedTileRed.setColor(Color.RED);
         selectedTileRed.setTextSize(50);
 
+        blue.setColor(Color.BLUE);
+        yellow.setColor(Color.YELLOW);
+
         // Create fake game data
         fakeGame = new Game();
         fakeGame.gameTiles = getTiles();
@@ -61,7 +66,6 @@ public class Graphics {
     // TODO: get rid of this after done testing
     public GameTile[][] getTiles()
     {
-        // TODO: cleanthis up
         GameTile gt1 = new GameTile("", TileStatus.Empty);
         GameTile gt2 = new GameTile("A", TileStatus.Neutral);
         GameTile gt3 = new GameTile("B", TileStatus.Empty);
@@ -88,14 +92,15 @@ public class Graphics {
     }
 
     public void Draw(Canvas canvas, int height, int width, Game game) {
-        DrawBackground(canvas, height, width);
+        //DrawBackground(canvas, height, width);
         DrawLetters(canvas, height, width, game);
         DrawLetters3(canvas, height, width, game);
     }
 
     private void DrawLetters3(Canvas canvas, int height, int width, Game game)
     {
-        GameTile[][] gameTiles = game.GetVisibleLetters();
+        GameTile[][] gameTiles = new GameTile[6][6];
+        gameTiles = game.GetVisibleLetters();
 
         float top, bottom, left, right;
         RectF rect;
@@ -109,7 +114,7 @@ public class Graphics {
                 left = width * (j/6f) + 4f;
                 right = width * ((j+1)/6f) - 4f;
                 rect = new RectF(left, top, right, bottom);
-                canvas.drawRect(rect, selectedTileGreen);
+                Draw(canvas, rect, gameTiles[j][i]);
             }
         }
     }
@@ -141,40 +146,56 @@ public class Graphics {
         }
     }
 
-    //
-    //  TODO:  Implement code here to just draw the stupid rectangles with drawRect. What was I thinking with grid lines
-    //
-    private void DrawLetters2(Canvas canvas, int height, int width, Game game)
+    private void Draw(Canvas c, RectF rect, GameTile gameTile)
     {
-        GameTile[][] gameTiles = new GameTile[6][6];
-        gameTiles = game.GetVisibleLetters();
+        if (gameTile == null)
+            return;
 
-        float d1 = height / 6f * (1/2f);
-        float d2 = width / 6f * (1/2f);
+        Paint colorToPaint = null;
 
-        float x;
-        float y;
+        switch (gameTile.tileStatus) {
+            case Empty:
+                colorToPaint = blue;
+                break;
+            case Neutral:
+                colorToPaint = yellow;
+                break;
+            case SelectedGreen:
+                colorToPaint = selectedTileGreen;
+                break;
+            case SelectedRed:
+                colorToPaint = selectedTileRed;
+                break;
+        };
 
-        // Draw each letter
-        for (int i = 0; i < 6; i++)
-        {
-            y = i * height / 6 + d1;  // Calculate xCords
-            float y2 = y;
-            y += 20f;  // Offset to account for font size
+        float x = rect.left + rect.width() / 2;
+        float y = rect.top + rect.height() / 2;
 
-            for (int j = 0; j < 6; j++)
-            {
-                x = j * width / 6 + d2; // Calculate yCords
-                float x2 = x;
+        c.drawRect(rect, colorToPaint);
+        c.drawText(gameTile._letter, x, y, textColor);
+    }
 
-                //canvas.drawRect(canvas, x+20f, );
+    private static Paint getPaint(GameTile gt)
+    {
+        Paint colorToPaint = null;
 
-                x -= 17f; // Calculate offset TODO: Change this to width of text / 2
+        /*
+        switch (ts) {
+            case Empty:
+                return;
+            case Neutral:
+                colorToPaint = textColor;
+                break;
+            case SelectedGreen:
+                colorToPaint = selectedTileGreen;
+                break;
+            case SelectedRed:
+                colorToPaint = selectedTileRed;
+                break;
+        };
+        */
+        return null;
 
-                Draw(canvas, x, y, gameTiles[i][j]);
-                //drawRect
-            }
-        }
     }
 
     private void Draw(Canvas c, float x, float y, GameTile gameTile)
