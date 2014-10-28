@@ -3,6 +3,7 @@ package com.apps.hgb.bananagrams;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 /**
  * Created by Hunt on 9/28/2014.
@@ -90,6 +91,22 @@ public class Graphics {
         DrawLetters(canvas, height, width, game);
     }
 
+    private void DrawLetters3(Canvas canvas, int height, int width, Game game)
+    {
+        GameTile[][] gameTiles = game.GetVisibleLetters();
+
+        for (int i = 0; i < 6; i ++)
+        {
+            float top = height * (i/6f);
+            float bottom = height * ((i+1)/6f);
+            for (int j = 0; j < 6; j++)
+            {
+                float left = width * (j/6f);
+                float right = width * ((j+1)/6f);
+            }
+        }
+    }
+
     private void DrawLetters(Canvas canvas, int height, int width, Game game)
     {
         GameTile[][] gameTiles = new GameTile[6][6];
@@ -128,21 +145,27 @@ public class Graphics {
         float d1 = height / 6f * (1/2f);
         float d2 = width / 6f * (1/2f);
 
-        float x = 20f;
-        float y = 0f;
+        float x;
+        float y;
 
         // Draw each letter
         for (int i = 0; i < 6; i++)
         {
             y = i * height / 6 + d1;  // Calculate xCords
+            float y2 = y;
             y += 20f;  // Offset to account for font size
 
             for (int j = 0; j < 6; j++)
             {
                 x = j * width / 6 + d2; // Calculate yCords
+                float x2 = x;
+
+                //canvas.drawRect(canvas, x+20f, );
+
                 x -= 17f; // Calculate offset TODO: Change this to width of text / 2
 
                 Draw(canvas, x, y, gameTiles[i][j]);
+                //drawRect
             }
         }
     }
