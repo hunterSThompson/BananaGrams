@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 /**
  * Created by Hunt on 9/28/2014.
@@ -89,20 +90,26 @@ public class Graphics {
     public void Draw(Canvas canvas, int height, int width, Game game) {
         DrawBackground(canvas, height, width);
         DrawLetters(canvas, height, width, game);
+        DrawLetters3(canvas, height, width, game);
     }
 
     private void DrawLetters3(Canvas canvas, int height, int width, Game game)
     {
         GameTile[][] gameTiles = game.GetVisibleLetters();
 
+        float top, bottom, left, right;
+        RectF rect;
+
         for (int i = 0; i < 6; i ++)
         {
-            float top = height * (i/6f);
-            float bottom = height * ((i+1)/6f);
+            top = height * (i/6f) + 4f;
+            bottom = height * ((i+1)/6f) - 4f;
             for (int j = 0; j < 6; j++)
             {
-                float left = width * (j/6f);
-                float right = width * ((j+1)/6f);
+                left = width * (j/6f) + 4f;
+                right = width * ((j+1)/6f) - 4f;
+                rect = new RectF(left, top, right, bottom);
+                canvas.drawRect(rect, selectedTileGreen);
             }
         }
     }
