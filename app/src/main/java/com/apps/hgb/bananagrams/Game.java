@@ -129,17 +129,17 @@ public class Game {
         yEnd += 1;
     }
 
+
+
     public void BoardClick(float x, float y, float height, float width)
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
         unHighlightAll();
         switch (touchedTile.tileStatus) {
             case Empty:
-                unHighlightAll();
                 touchedTile.Touch();
                 return;
             case Neutral:
-                unHighlightAll();
                 touchedTile.Touch();
                 break;
             case SelectedGreen:

@@ -37,10 +37,10 @@ public class Graphics {
         textColor.setColor(Color.BLACK);
 
         selectedTileGreen.setColor(Color.GREEN);
-        selectedTileGreen.setAlpha(5);
+        selectedTileGreen.setAlpha(128);
 
         selectedTileRed.setColor(Color.RED);
-        selectedTileRed.setAlpha(5);
+        selectedTileRed.setAlpha(128);
     }
 
     public void Draw(Canvas canvas, int height, int width, Game game) {
@@ -74,7 +74,6 @@ public class Graphics {
             return;
 
         Paint colorToPaint = null;
-
         switch (gameTile.tileStatus) {
             case Empty:
                 colorToPaint = neutralColor;
