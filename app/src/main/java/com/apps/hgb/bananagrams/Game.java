@@ -76,8 +76,6 @@ public class Game {
     // TODO: get rid of this after done testing
     public GameTile[][] getTiles()
     {
-        // TODO: cleanthis up
-
         GameTile gt1 = new GameTile("", TileStatus.Empty);
         GameTile gt2 = new GameTile("H", TileStatus.Neutral);
         GameTile gt3 = new GameTile("U", TileStatus.Empty);
@@ -103,25 +101,29 @@ public class Game {
     }
 
     // TODO: Change these to one method with switch later
-    public void MoveUp()
+    // Left
+    public void MoveLeft()
     {
         xStart += 1;
         xEnd += 1;
     }
 
-    public void MoveDown()
+    // right
+    public void MoveRight()
     {
         xStart -= 1;
         xEnd -= 1;
     }
 
-    public void MoveRight()
+    // Down
+    public void MoveDown()
     {
         yStart -= 1;
         yEnd -= 1;
     }
 
-    public void MoveLeft()
+    // UP
+    public void MoveUp()
     {
         yStart += 1;
         yEnd += 1;
@@ -130,6 +132,7 @@ public class Game {
     public void BoardClick(float x, float y, float height, float width)
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
+        unHighlightAll();
         switch (touchedTile.tileStatus) {
             case Empty:
                 unHighlightAll();
@@ -143,7 +146,8 @@ public class Game {
                 touchedTile.Touch();
                 break;
             case SelectedRed:
-                DeleteTile(touchedTile);
+                touchedTile.Touch();
+                //DeleteTile(touchedTile);
                 return;
         };
         //Utilities.GetTouchedTile2(x, y, this, height, width);

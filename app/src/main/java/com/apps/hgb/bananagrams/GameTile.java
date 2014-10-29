@@ -6,15 +6,17 @@ package com.apps.hgb.bananagrams;
 
 public class GameTile {
 
+    public String letter;
+    public TileStatus tileStatus;
+
     public GameTile(String letter, TileStatus _tileStatus) {
-        _letter = letter;
-        tileStatus = _tileStatus;
+        this.letter = letter;
+        this.tileStatus = _tileStatus;
     }
 
     public void Touch()
     {
         switch (tileStatus) {
-            // Should never happen
             case Empty:
                 tileStatus = TileStatus.SelectedGreen;
                 return;
@@ -24,43 +26,23 @@ public class GameTile {
             case SelectedGreen:
                 tileStatus = TileStatus.SelectedRed;
                 return;
-            // Should never happen
             case SelectedRed:
+                tileStatus = TileStatus.Empty;
+                //letter = "";
                 return;
         };
     }
 
     public void SetToEmpty()
     {
-        tileStatus = TileStatus.Empty;
+        this.tileStatus = TileStatus.Empty;
+        this.letter = "";
     }
 
-    public void SetToNeutral(String letter)
+    public void SetLetter(String letter)
     {
-        tileStatus = TileStatus.Neutral;
-        _letter = letter;
+        this.tileStatus = TileStatus.Neutral;
+        this.letter = letter;
     }
-
-    //
-    //  Used when a tile is selected and all green/red tiles need to be neutral again.
-    //  TODO: Considering there are 100*100 = 10000 tiles
-    //
-    public void SetToNeutral()
-    {
-        tileStatus = TileStatus.Neutral;
-    }
-
-    public void SetToGreen()
-    {
-        tileStatus = TileStatus.SelectedGreen;
-    }
-
-    public void SetToRed()
-    {
-        tileStatus = TileStatus.SelectedRed;
-    }
-
-    public String _letter;
-    public TileStatus tileStatus;
 }
 
