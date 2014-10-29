@@ -20,6 +20,8 @@ public class Game {
     public int xEnd;
     public int yEnd;
 
+    private GameActivity gameActivity;
+
     public GameTile[][] GetVisibleLetters() {
 
         GameTile[][] tilesToDraw = new GameTile[6][6];
@@ -54,6 +56,11 @@ public class Game {
     public Game()
     {
         InitializeGraphics();
+    }
+
+    // TODO: Implement Game constructor.  Should randomly generate tiles
+    public Game(GameActivity gameActivity) {
+        this.gameActivity = gameActivity;
     }
 
     // TODO: Implement resume game constructor.  Should call deserialize function.

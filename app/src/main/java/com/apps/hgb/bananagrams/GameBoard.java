@@ -11,13 +11,13 @@ import android.view.View;
 public class GameBoard extends View {
 
     GameActivity gameActivity;
-    Graphics g;
+    Graphics graphics;
     Game game;
 
     public GameBoard(Context context, Game _game) {
         super(context);
 
-        g = new Graphics();
+        graphics = new Graphics();
         gameActivity = (GameActivity) context;
 
         game = _game;
@@ -39,9 +39,7 @@ public class GameBoard extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-        g.Draw(canvas, getHeight(), getWidth(), game);
-
+        graphics.Draw(canvas, getHeight(), getWidth(), game);
         super.onDraw(canvas);
     }
 

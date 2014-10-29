@@ -25,7 +25,7 @@ public class GameActivity extends Activity {
 
         //  TODO: Check intent resume game
         // if Intent == newGame
-        game = new Game();
+        game = new Game(this);
         // else
         // game = new Game(savedData);
 
@@ -38,10 +38,13 @@ public class GameActivity extends Activity {
         bottomBorder.setBackgroundColor(Color.BLUE);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 1);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-
         gameContainer.addView(bottomBorder, params);
 
         gameBoard.requestFocus();
+    }
+
+    private void InitializeTileButtons()
+    {
     }
 
     public void rightClick(View v)
