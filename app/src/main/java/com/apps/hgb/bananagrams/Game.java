@@ -35,7 +35,6 @@ public class Game {
         if (difX != 5 || difY != 5)
         {
             // TODO: The app should crash if our view frame isn't the right num of things...
-            // that would be very bad...
         }
 
         for (int i = this.xStart; i < this.xEnd; i++)
@@ -61,6 +60,7 @@ public class Game {
     // TODO: Implement Game constructor.  Should randomly generate tiles
     public Game(GameActivity gameActivity) {
         this.gameActivity = gameActivity;
+        InitializeGraphics();
     }
 
     // TODO: Implement resume game constructor.  Should call deserialize function.
@@ -175,8 +175,17 @@ public class Game {
         }
     }
 
+    //
+    //
+    //
     private void unHighlightAll()
     {
+        // Set previously selected tile to neutral
+
+        // if selected == null
+        //   return
+        // else if sel == Tile.Green
+        //   sel == neutral
     }
 
     // TODO: Implement
