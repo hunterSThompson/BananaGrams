@@ -54,7 +54,6 @@ public class Graphics {
 
         // Create fake game data
         fakeGame = new Game();
-        fakeGame.gameTiles = getTiles();
 
         // Initialize view frame
         fakeGame.xStart = 47;
@@ -63,44 +62,13 @@ public class Graphics {
         fakeGame.yEnd = 52;
     }
 
-    // TODO: get rid of this after done testing
-    public GameTile[][] getTiles()
-    {
-        GameTile gt1 = new GameTile("", TileStatus.Empty);
-        GameTile gt2 = new GameTile("A", TileStatus.Neutral);
-        GameTile gt3 = new GameTile("B", TileStatus.Empty);
-        GameTile gt4 = new GameTile("C", TileStatus.Empty);
-        GameTile gt5 = new GameTile("D", TileStatus.Empty);
-        GameTile gt6 = new GameTile("E", TileStatus.Empty);
-
-        GameTile[][] gts = new GameTile[100][100];
-
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                gts[i][j] = new GameTile("", TileStatus.Empty);
-            }
-        }
-
-        int i= 0;
-        int x = i++;
-        gts [50][50] = gt2;
-        gts [49][49] = gt2;
-        gts [50][48] = gt2;
-        gts [48][50] = gt2;
-        gts [51][50] = gt2;
-        return gts;
-    }
-
     public void Draw(Canvas canvas, int height, int width, Game game) {
-        //DrawBackground(canvas, height, width);
-        DrawLetters(canvas, height, width, game);
         DrawLetters3(canvas, height, width, game);
     }
 
     private void DrawLetters3(Canvas canvas, int height, int width, Game game)
     {
-        GameTile[][] gameTiles = new GameTile[6][6];
-        gameTiles = game.GetVisibleLetters();
+        GameTile[][] gameTiles = game.GetVisibleLetters();
 
         float top, bottom, left, right;
         RectF rect;
@@ -168,11 +136,14 @@ public class Graphics {
                 break;
         };
 
-        float x = rect.left + rect.width() / 2;
-        float y = rect.top + rect.height() / 2;
+        String letter = gameTile._letter;
+
+        float textHeight = textColor.measureText(letter, 0, letter.length());
+        float x = rect.left; // + rect.width(); // 2f; // 4;
+        float y = rect.top + textHeight; // + rect.height() / 2f; // / 2;
 
         c.drawRect(rect, colorToPaint);
-        c.drawText(gameTile._letter, x, y, textColor);
+        c.drawText(letter, x, y, textColor);
     }
 
     private static Paint getPaint(GameTile gt)

@@ -96,6 +96,9 @@ public class Game {
         int i= 0;
         int x = i++;
         gts [50][50] = gt2;
+        gts [51][51] = gt3;
+        gts [50][51] = gt4;
+        gts [51][50] = gt5;
         return gts;
     }
 
