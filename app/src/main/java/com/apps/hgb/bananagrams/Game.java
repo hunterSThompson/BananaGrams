@@ -136,8 +136,6 @@ public class Game {
         yEnd += 1;
     }
 
-
-
     public void BoardClick(float x, float y, float height, float width)
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
