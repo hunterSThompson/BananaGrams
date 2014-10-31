@@ -18,11 +18,6 @@ public class Graphics {
     Paint selectedTileGreen = new Paint();
     Paint selectedTileRed = new Paint();
 
-    //
-    //  Fake game data member for dev
-    //
-    Game fakeGame = new Game();
-
     public Graphics() {
         InitializeGraphics();
     }

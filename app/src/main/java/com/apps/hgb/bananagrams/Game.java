@@ -2,6 +2,7 @@ package com.apps.hgb.bananagrams;
 
 import android.graphics.Color;
 import android.graphics.Point;
+import android.view.View;
 
 /**
  * Created by Hunt on 9/28/2014.
@@ -11,6 +12,7 @@ public class Game {
     public GameTile[][] gameTiles = new GameTile[100][100];
 
     public String[] selectableTiles = new String[50];
+    public TileManger tileManger;
 
     public Range xRange;
     public Range yRange;
@@ -51,15 +53,10 @@ public class Game {
         return tilesToDraw;
     }
 
-    // TODO: Implement Game constructor.  Should randomly generate tiles
-    public Game()
-    {
-        InitializeGraphics();
-    }
 
     // TODO: Implement Game constructor.  Should randomly generate tiles
-    public Game(GameActivity gameActivity) {
-        this.gameActivity = gameActivity;
+    public Game(View tileContainer) {
+        this.tileManger = new TileManger(tileContainer, this);
         InitializeGraphics();
     }
 

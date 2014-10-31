@@ -7,8 +7,13 @@ import android.view.View;
  */
 public class TileManger {
 
-    public TileManger(View TileContainer)
+    private Game game;
+    private View tileContainer;
+
+    public TileManger(View tileContainer, Game game)
     {
+        this.game = game;
+        this.tileContainer = tileContainer;
     }
 
     //
@@ -28,6 +33,13 @@ public class TileManger {
 
 
         /// Maybe should cash lowest row
+    }
+
+    //
+    // Handle
+    //
+    private void tileClick(View v)
+    {
     }
 
     //

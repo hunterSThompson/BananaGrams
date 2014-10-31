@@ -23,22 +23,17 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        View tileContainer = findViewById(R.id.TileContainer);
+
         //  TODO: Check intent resume game
         // if Intent == newGame
-        game = new Game(this);
+        game = new Game(tileContainer);
         // else
         // game = new Game(savedData);
 
         gameBoard = new GameBoard(this, game);
         gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
         gameContainer.addView(gameBoard);
-
-        // TODO: Finish fixing border issue below. Really really annoying.
-        View bottomBorder = new View(this);
-        bottomBorder.setBackgroundColor(Color.BLUE);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 1);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        gameContainer.addView(bottomBorder, params);
 
         gameBoard.requestFocus();
     }
