@@ -36,10 +36,18 @@ public class TileManger {
     }
 
     //
-    // Handle
+    // When tile is clicked, remove from tray and add to board
+    // if a GameTile is selected
     //
-    private void tileClick(View v)
+    public void TileClick(View v, String letter)
     {
+        // Return if no tile is selected
+        // if (!game.CanPlaceNewTile)
+        //    return;
+
+        // Get rid of tile in tray
+
+        // Add tile to board
     }
 
     //

@@ -155,6 +155,10 @@ public class Game {
         //Utilities.GetTouchedTile2(x, y, this, height, width);
     }
 
+    public void AddTileToBoard(String letter)
+    {
+    }
+
     //
     //  TODO:  Refactor array to ArrayList later.  Or return coordinates where removed tile is. This is sloppy.
     //
