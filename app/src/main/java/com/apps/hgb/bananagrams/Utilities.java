@@ -5,11 +5,6 @@ package com.apps.hgb.bananagrams;
  */
 public final class Utilities {
 
-    static boolean getBool()
-    {
-        return true;
-    }
-
     static GameTile GetTouchedTile2(float x, float y, Game game, float height, float width)
     {
         int xf = game.xStart + (int) (x / width / 6);
@@ -32,7 +27,7 @@ public final class Utilities {
         int xf = xTileNum + game.xStart;
         int yf = yTileNum + game.yStart;
 
-        // TODO:  Throw error here
+        // TODO:  Throw WTF error here
         if ((xf | yf) > 100)
         {
         }
