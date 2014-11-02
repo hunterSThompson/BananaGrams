@@ -9,12 +9,12 @@ import android.view.View;
  */
 public class Game {
 
+    /********************************************************************
+     * Members
+     ********************************************************************/
     public GameTile[][] gameTiles = new GameTile[100][100];
 
     public TileManger tileManger; // TODO remove
-
-    public Range xRange;
-    public Range yRange;
 
     public int yStart;
     public int xStart;
@@ -22,9 +22,11 @@ public class Game {
     public int yEnd;
 
     private GameTile SelectedTile = null;
-
     private GameActivity gameActivity;
 
+    /********************************************************************
+     * Constructor
+    ********************************************************************/
     public GameTile[][] GetVisibleLetters() {
 
         GameTile[][] tilesToDraw = new GameTile[6][6];
@@ -68,7 +70,8 @@ public class Game {
     private void InitializeGraphics()
     {
         // Create fake game data
-        gameTiles = getTiles();
+        //gameTiles = getTiles();
+        InitializeTiles();
 
         // Initialize view frame
         this.xStart = 47;
@@ -77,55 +80,52 @@ public class Game {
         this.yEnd = 53;
     }
 
-    // TODO: get rid of this after done testing
-    public GameTile[][] getTiles()
+    private void InitializeTiles()
+    {
+        GameTile[][] gts = new GameTile[100][100];
+
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 100; j++) {
+                gts[i][j] = new GameTile();
+            }
+        }
+
+        gameTiles = gts;
+    }
+
+    // TODO: Get rid of after done testing.
+    private GameTile[][] getTiles()
     {
         GameTile gt2 = new GameTile("H", true, true);
         SelectedTile = gt2;
+
         GameTile gt3 = new GameTile("U", false, true);
         GameTile gt4 = new GameTile("N", false, true);
         GameTile gt5 = new GameTile("T", false, true);
 
         GameTile[][] gts = new GameTile[100][100];
-
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                gts[i][j] = new GameTile("", false, false);
-            }
-        }
-
-        int i= 0;
-        int x = i++;
-        gts [50][50] = gt2;
-        gts [51][51] = gt3;
-        gts [50][51] = gt4;
-        gts [51][50] = gt5;
         return gts;
     }
 
-    // TODO: Change these to one method with switch later
-    // Left
+    // TODO: Change these one method with switch later
     public void MoveLeft()
     {
         xStart += 1;
         xEnd += 1;
     }
 
-    // right
     public void MoveRight()
     {
         xStart -= 1;
         xEnd -= 1;
     }
 
-    // Down
     public void MoveDown()
     {
         yStart -= 1;
         yEnd -= 1;
     }
 
-    // UP
     public void MoveUp()
     {
         yStart += 1;
@@ -144,7 +144,7 @@ public class Game {
         {
             if (touchedTile.HasLetter)
             {
-                //PopTile(touchedTile);
+                PopTile(touchedTile);
                 touchedTile.letter = "";
                 touchedTile.Selected = false;
                 touchedTile.HasLetter = false;
@@ -157,6 +157,18 @@ public class Game {
         }
     }
 
+    //
+    //  Move tile from Board to Tray
+    //
+    private void PopTile(GameTile gt)
+    {
+        //gameActivity.PopTile();
+    }
+
+    //
+    //  Adds a tile to the game board from the tray.
+    //  Returns true if successful (if no tile is highlighted then it can't be added)
+    //
     public boolean AddTileToBoard(String letter)
     {
         if (SelectedTile == null)
@@ -164,36 +176,11 @@ public class Game {
 
         SelectedTile.letter = letter;
         SelectedTile.HasLetter = true;
+        SelectedTile.Selected = false;
+        SelectedTile = null;
         return true;
     }
 
-    //
-    //  TODO:  Refactor array to ArrayList later.  Or return coordinates where removed tile is. This is sloppy.
-    //
-    private void DeleteTile(GameTile tileToRemove)
-    {
-        for (int i = 0; i < gameTiles.length; i++)
-        {
-            for (int j = 0; j < gameTiles[i].length; j++)
-            {
-                if (gameTiles[i][j] == tileToRemove)
-                    gameTiles[i][j].SetToEmpty();
-            }
-        }
-    }
-
-    //
-    //
-    //
-    private void unHighlightAll()
-    {
-        // Set previously selected tile to neutral
-
-        // if selected == null
-        //   return
-        // else if sel == Tile.Green
-        //   sel == neutral
-    }
 
     // TODO: Implement
     private Game Deserialize(String data)
@@ -207,6 +194,7 @@ public class Game {
         return "";
     }
 
+    // TODO: Implement
     public boolean GameOver()
     {
         return false;
