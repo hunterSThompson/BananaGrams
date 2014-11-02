@@ -1,6 +1,7 @@
 package com.apps.hgb.bananagrams;
 
 import android.view.View;
+import android.widget.Button;
 
 /**
  * Created by Hunt on 10/29/2014.
@@ -55,11 +56,10 @@ public class TileManger {
     //
     private void InitializeTiles(View v, String data)
     {
-
-        // if data == "" | null
-        //      GenerateNewData();
-        // else
-        //      Deserialize(data);
+        if (data == "")
+            GenerateNewData();
+        else
+            Deserialize(data);
     }
 
     private void Deserialize(String data)
@@ -71,5 +71,6 @@ public class TileManger {
 
     private void GenerateNewData()
     {
+        //ButtonTile bt = new ButtonTile(this, "X");
     }
 }

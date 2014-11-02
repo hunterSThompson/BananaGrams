@@ -1,15 +1,16 @@
 package com.apps.hgb.bananagrams;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GameActivity extends Activity {
@@ -17,6 +18,7 @@ public class GameActivity extends Activity {
     RelativeLayout gameContainer;
     Game game;
     GameBoard gameBoard;
+    LinearLayout buttonTray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         View tileContainer = findViewById(R.id.TileContainer);
+        buttonTray = (LinearLayout) findViewById(R.id.ButtonContainer);
 
         //  TODO: Check intent resume game
         // if Intent == newGame
@@ -36,6 +39,31 @@ public class GameActivity extends Activity {
         gameContainer.addView(gameBoard);
 
         gameBoard.requestFocus();
+
+        ArrayList<ArrayList<Button>> buttons = getButtons();
+    }
+
+    private ArrayList<ArrayList<Button>> getButtons()
+    {
+        if (buttonTray == null)
+            return null; // Log error also
+
+        ArrayList<ArrayList<Button>> rows = new ArrayList<ArrayList<Button>>();
+        for (int i = 0; i < buttonTray.getChildCount(); i++)
+        {
+            LinearLayout row = (LinearLayout) buttonTray.getChildAt(i);
+            rows.add(getButtonsFromRow(row));
+        }
+        return rows;
+    }
+
+    private ArrayList<Button> getButtonsFromRow(LinearLayout row)
+    {
+        ArrayList<Button> buttons = new ArrayList<Button>();
+        for (int i=0; i < buttonTray.getChildCount(); i++){
+            buttons.add((Button)row.getChildAt(i));
+        }
+        return buttons;
     }
 
     private void InitializeTileButtons()
