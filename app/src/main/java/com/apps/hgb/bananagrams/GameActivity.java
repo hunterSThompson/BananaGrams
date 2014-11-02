@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,6 +42,18 @@ public class GameActivity extends Activity {
         gameBoard.requestFocus();
 
         ArrayList<ArrayList<Button>> buttons = getButtons();
+        Button b = buttons.get(1).get(1);
+        b.setText("K");
+
+        final GameActivity gameActivity = this;
+
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ((ViewGroup) v.getParent()).removeView(v);
+                game.AddTileToBoard("K");
+                gameBoard.Invalidate();
+            }
+        });
     }
 
     private ArrayList<ArrayList<Button>> getButtons()

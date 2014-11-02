@@ -11,8 +11,7 @@ public class Game {
 
     public GameTile[][] gameTiles = new GameTile[100][100];
 
-    public String[] selectableTiles = new String[50];
-    public TileManger tileManger;
+    public TileManger tileManger; // TODO remove
 
     public Range xRange;
     public Range yRange;
@@ -21,6 +20,8 @@ public class Game {
     public int xStart;
     public int xEnd;
     public int yEnd;
+
+    private GameTile SelectedTile = null;
 
     private GameActivity gameActivity;
 
@@ -52,7 +53,6 @@ public class Game {
 
         return tilesToDraw;
     }
-
 
     // TODO: Implement Game constructor.  Should randomly generate tiles
     public Game(View tileContainer) {
@@ -136,6 +136,7 @@ public class Game {
     public void BoardClick(float x, float y, float height, float width)
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
+        SelectedTile = touchedTile;
         unHighlightAll();
         switch (touchedTile.tileStatus) {
             case Empty:
@@ -157,6 +158,10 @@ public class Game {
 
     public void AddTileToBoard(String letter)
     {
+        if (SelectedTile == null)
+            return;
+
+        SelectedTile.letter = letter;
     }
 
     //

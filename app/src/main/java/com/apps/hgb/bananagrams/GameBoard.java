@@ -28,7 +28,7 @@ public class GameBoard extends View {
 
     public void Invalidate()
     {
-        Invalidate();
+        invalidate();
     }
 
     //  TODO: Implement continue game constructor
