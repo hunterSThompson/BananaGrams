@@ -25,12 +25,11 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        View tileContainer = findViewById(R.id.TileContainer);
         buttonTray = (LinearLayout) findViewById(R.id.ButtonContainer);
 
         //  TODO: Check intent resume game
         // if Intent == newGame
-        game = new Game(tileContainer);
+        game = new Game(this);
         // else
         // game = new Game(savedData);
 
@@ -41,23 +40,6 @@ public class GameActivity extends Activity {
         gameBoard.requestFocus();
 
         getButtons2();
-
-        /*
-        ArrayList<ArrayList<Button>> buttons = getButtons();
-        Button b = buttons.get(1).get(1);
-        b.setText("K");
-
-        final GameActivity gameActivity = this;
-
-        b.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (!game.AddTileToBoard("K"))
-                    return;
-                ((ViewGroup) v.getParent()).removeView(v);
-                gameBoard.Invalidate();
-            }
-        });
-        */
     }
 
     private ArrayList<ArrayList<Button>> getButtons()

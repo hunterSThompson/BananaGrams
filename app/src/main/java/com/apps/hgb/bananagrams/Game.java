@@ -14,8 +14,6 @@ public class Game {
      ********************************************************************/
     public GameTile[][] gameTiles = new GameTile[100][100];
 
-    public TileManger tileManger; // TODO remove
-
     public int yStart;
     public int xStart;
     public int xEnd;
@@ -57,20 +55,24 @@ public class Game {
     }
 
     // TODO: Implement Game constructor.  Should randomly generate tiles
-    public Game(View tileContainer) {
-        this.tileManger = new TileManger(tileContainer, this);
+    public Game(GameActivity gameActivity) {
+        this.gameActivity = gameActivity;
         InitializeGraphics();
     }
 
-    // TODO: Implement resume game constructor.  Should call deserialize function.
-    public Game(String data)
+    // TODO:
+    public Game(GameActivity gameActivity, String data)
     {
+        this.gameActivity = gameActivity;
+        //Deserialize()
     }
 
+
+    /********************************************************************
+     * Public Methods
+     ********************************************************************/
     private void InitializeGraphics()
     {
-        // Create fake game data
-        //gameTiles = getTiles();
         InitializeTiles();
 
         // Initialize view frame
@@ -91,20 +93,6 @@ public class Game {
         }
 
         gameTiles = gts;
-    }
-
-    // TODO: Get rid of after done testing.
-    private GameTile[][] getTiles()
-    {
-        GameTile gt2 = new GameTile("H", true, true);
-        SelectedTile = gt2;
-
-        GameTile gt3 = new GameTile("U", false, true);
-        GameTile gt4 = new GameTile("N", false, true);
-        GameTile gt5 = new GameTile("T", false, true);
-
-        GameTile[][] gts = new GameTile[100][100];
-        return gts;
     }
 
     // TODO: Change these one method with switch later
@@ -142,6 +130,15 @@ public class Game {
         }
         else
         {
+            // TODO: Fixed logic here!
+            // If you:
+            // 1) Add a tile
+            // 2) Add another tile
+            // 3) Highlight one
+            // 4) Click the other
+            // The other will be deleted. Fix logic
+            // Main thing: there is no check if touched tile is selected tile
+
             if (touchedTile.HasLetter)
             {
                 PopTile(touchedTile);
