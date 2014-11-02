@@ -80,18 +80,17 @@ public class Game {
     // TODO: get rid of this after done testing
     public GameTile[][] getTiles()
     {
-        GameTile gt1 = new GameTile("", TileStatus.Empty);
-        GameTile gt2 = new GameTile("H", TileStatus.Neutral);
-        GameTile gt3 = new GameTile("U", TileStatus.Empty);
-        GameTile gt4 = new GameTile("N", TileStatus.Empty);
-        GameTile gt5 = new GameTile("T", TileStatus.Empty);
-        GameTile gt6 = new GameTile("E", TileStatus.Empty);
+        GameTile gt2 = new GameTile("H", true, true);
+        SelectedTile = gt2;
+        GameTile gt3 = new GameTile("U", false, true);
+        GameTile gt4 = new GameTile("N", false, true);
+        GameTile gt5 = new GameTile("T", false, true);
 
         GameTile[][] gts = new GameTile[100][100];
 
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
-                gts[i][j] = new GameTile("", TileStatus.Empty);
+                gts[i][j] = new GameTile("", false, false);
             }
         }
 
@@ -136,24 +135,26 @@ public class Game {
     public void BoardClick(float x, float y, float height, float width)
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
-        SelectedTile = touchedTile;
-        unHighlightAll();
-        switch (touchedTile.tileStatus) {
-            case Empty:
-                touchedTile.Touch();
-                return;
-            case Neutral:
-                touchedTile.Touch();
-                break;
-            case SelectedGreen:
-                touchedTile.Touch();
-                break;
-            case SelectedRed:
-                touchedTile.Touch();
-                //DeleteTile(touchedTile);
-                return;
-        };
-        //Utilities.GetTouchedTile2(x, y, this, height, width);
+
+        if (SelectedTile == null) {
+            touchedTile.Selected = true;
+            SelectedTile = touchedTile;
+        }
+        else
+        {
+            if (touchedTile.HasLetter)
+            {
+                //PopTile(touchedTile);
+                touchedTile.letter = "";
+                touchedTile.Selected = false;
+                touchedTile.HasLetter = false;
+            }
+            else
+            {
+                SelectedTile.Selected = false;
+            }
+            SelectedTile = null;
+        }
     }
 
     public boolean AddTileToBoard(String letter)
@@ -162,6 +163,7 @@ public class Game {
             return false;
 
         SelectedTile.letter = letter;
+        SelectedTile.HasLetter = true;
         return true;
     }
 

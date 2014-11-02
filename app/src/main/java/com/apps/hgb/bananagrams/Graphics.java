@@ -69,6 +69,13 @@ public class Graphics {
             return;
 
         Paint colorToPaint = null;
+
+        //if (gameTile.tileStatus == TileStatus.Empty || gameTile.tileStatus == TileStatus.Filled)
+        if (gameTile.Selected)
+            colorToPaint = selectedTileGreen;
+        else
+            colorToPaint = neutralColor;
+        /*
         switch (gameTile.tileStatus) {
             case Empty:
                 colorToPaint = neutralColor;
@@ -83,6 +90,7 @@ public class Graphics {
                 colorToPaint = selectedTileRed;
                 break;
         };
+        */
 
         String letter = gameTile.letter;
 
