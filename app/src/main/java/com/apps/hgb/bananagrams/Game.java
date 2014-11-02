@@ -156,12 +156,13 @@ public class Game {
         //Utilities.GetTouchedTile2(x, y, this, height, width);
     }
 
-    public void AddTileToBoard(String letter)
+    public boolean AddTileToBoard(String letter)
     {
         if (SelectedTile == null)
-            return;
+            return false;
 
         SelectedTile.letter = letter;
+        return true;
     }
 
     //

@@ -41,6 +41,9 @@ public class GameActivity extends Activity {
 
         gameBoard.requestFocus();
 
+        getButtons2();
+
+        /*
         ArrayList<ArrayList<Button>> buttons = getButtons();
         Button b = buttons.get(1).get(1);
         b.setText("K");
@@ -49,11 +52,13 @@ public class GameActivity extends Activity {
 
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (!game.AddTileToBoard("K"))
+                    return;
                 ((ViewGroup) v.getParent()).removeView(v);
-                game.AddTileToBoard("K");
                 gameBoard.Invalidate();
             }
         });
+        */
     }
 
     private ArrayList<ArrayList<Button>> getButtons()
@@ -77,6 +82,39 @@ public class GameActivity extends Activity {
             buttons.add((Button)row.getChildAt(i));
         }
         return buttons;
+    }
+
+    private void getButtons2()
+    {
+        if (buttonTray == null)
+            return; // Log error also
+
+        ArrayList<ArrayList<Button>> rows = new ArrayList<ArrayList<Button>>();
+        for (int i = 0; i < buttonTray.getChildCount(); i++)
+        {
+            LinearLayout row = (LinearLayout) buttonTray.getChildAt(i);
+            getButtonsFromRow2(row);
+        }
+    }
+
+    private void getButtonsFromRow2(LinearLayout row)
+    {
+        for (int i=0; i < buttonTray.getChildCount(); i++){
+            Button b = (Button)row.getChildAt(i);
+            setButtonClickListener(b);
+        }
+    }
+
+    private void setButtonClickListener(Button b)
+    {
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (!game.AddTileToBoard("K"))
+                    return;
+                ((ViewGroup) v.getParent()).removeView(v);
+                gameBoard.Invalidate();
+            }
+        });
     }
 
     private void InitializeTileButtons()
