@@ -139,7 +139,8 @@ public class Game {
             // The other will be deleted. Fix logic
             // Main thing: there is no check if touched tile is selected tile
 
-            if (touchedTile.HasLetter)
+            //if (touchedTile.HasLetter)
+            if (SelectedTile == touchedTile)
             {
                 PopTile(touchedTile);
                 touchedTile.letter = "";
