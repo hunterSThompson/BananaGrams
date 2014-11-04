@@ -1,6 +1,7 @@
 package com.apps.hgb.bananagrams;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,7 +40,23 @@ public class GameActivity extends Activity {
 
         gameBoard.requestFocus();
 
+        String[] letts = Utilities.ShuffleGameLetters();
+
         getButtons2();
+    }
+
+    private void InitTrayButtons()
+    {
+        String[] letts = Utilities.ShuffleGameLetters();
+        for (int i = 0; i < letts.length; i++)
+
+            for (int j = 0; j < 9; j++) {
+                LinearLayout row = new LinearLayout(this);
+                row.setOrientation(LinearLayout.HORIZONTAL);
+                //row.setLayoutParams(new LinearLayout.LayoutParams(
+                        //LinearLayout.LayoutParams.FILL_PARENT,
+                //));
+            }
     }
 
     private ArrayList<ArrayList<Button>> getButtons()
@@ -70,7 +87,6 @@ public class GameActivity extends Activity {
         if (buttonTray == null)
             return; // Log error also
 
-        ArrayList<ArrayList<Button>> rows = new ArrayList<ArrayList<Button>>();
         for (int i = 0; i < buttonTray.getChildCount(); i++)
         {
             LinearLayout row = (LinearLayout) buttonTray.getChildAt(i);
@@ -80,7 +96,7 @@ public class GameActivity extends Activity {
 
     private void getButtonsFromRow2(LinearLayout row)
     {
-        for (int i=0; i < buttonTray.getChildCount(); i++){
+        for (int i=0; i < row.getChildCount(); i++){
             Button b = (Button)row.getChildAt(i);
             setButtonClickListener(b);
         }
@@ -90,7 +106,10 @@ public class GameActivity extends Activity {
     {
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (!game.AddTileToBoard("K"))
+                Button b = (Button) v;
+                String text = b.getText().toString();
+
+                if (!game.AddTileToBoard(text))
                     return;
                 ((ViewGroup) v.getParent()).removeView(v);
                 gameBoard.Invalidate();

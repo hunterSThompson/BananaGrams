@@ -7,7 +7,9 @@ import android.view.View;
 /**
  * Created by Hunt on 9/28/2014.
  */
+// TODO Organize methods/members into correct sections
 public class Game {
+
 
     /********************************************************************
      * Members
@@ -25,6 +27,7 @@ public class Game {
     /********************************************************************
      * Constructor
     ********************************************************************/
+    // TODO Add error handling for out of index array
     public GameTile[][] GetVisibleLetters() {
 
         GameTile[][] tilesToDraw = new GameTile[6][6];
@@ -130,16 +133,6 @@ public class Game {
         }
         else
         {
-            // TODO: Fixed logic here!
-            // If you:
-            // 1) Add a tile
-            // 2) Add another tile
-            // 3) Highlight one
-            // 4) Click the other
-            // The other will be deleted. Fix logic
-            // Main thing: there is no check if touched tile is selected tile
-
-            //if (touchedTile.HasLetter)
             if (SelectedTile == touchedTile)
             {
                 PopTile(touchedTile);

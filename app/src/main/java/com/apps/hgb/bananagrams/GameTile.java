@@ -18,6 +18,8 @@ public class GameTile {
         HasLetter = false;
     }
 
+    // TODO Add methods for Delete/Highlight/Unhighlight
+
     public GameTile(String letter, boolean selected, boolean hasLetter)
     {
         this.letter = letter;
@@ -25,10 +27,12 @@ public class GameTile {
         this.HasLetter = hasLetter;
     }
 
+    /*
     public void Delete()
     {
         this.letter = "";
     }
+    */
 
     public void SetLetter(String letter)
     {

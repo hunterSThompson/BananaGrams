@@ -1,5 +1,7 @@
 package com.apps.hgb.bananagrams;
 
+import java.util.Random;
+
 /**
  * Created by Hunt on 10/2/2014.
  */
@@ -13,6 +15,7 @@ public final class Utilities {
         return game.gameTiles[xf][yf];
     }
 
+    //TODO put this method in game class. Maybe refactor to use rect.Contains(x, y)
     static GameTile GetTouchedTile(float x, float y, Game game, float height, float width)
     {
         float cellWidth = width / 6;
@@ -37,5 +40,21 @@ public final class Utilities {
 
         GameTile gt = game.gameTiles[xf][yf];
         return game.gameTiles[xf][yf];
+    }
+
+    public static String[] ShuffleGameLetters()
+    {
+        String[] ar = Constants.Letters;
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            String a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+
+        return ar;
     }
 }
