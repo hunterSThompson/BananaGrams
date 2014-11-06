@@ -7,9 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,14 +22,37 @@ public class GameActivity extends Activity {
     RelativeLayout gameContainer;
     Game game;
     GameBoard gameBoard;
-    LinearLayout buttonTray;
+    //LinearLayout buttonTray;
+    GridView buttonTray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        buttonTray = (LinearLayout) findViewById(R.id.ButtonContainer);
+        final String[] letts = Utilities.ShuffleGameLetters();
+        ButtonTrayAdapter adapter = new ButtonTrayAdapter(this, letts);
+        //buttonTray = (LinearLayout) findViewById(R.id.ButtonContainer);
+
+        buttonTray = (GridView) findViewById(R.id.gridView);
+        buttonTray.setAdapter(adapter);
+        /*
+        buttonTray.setOnClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+            }
+        });
+        */
+
+        buttonTray.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(GameActivity.this, "You Clicked at " + letts[+position], Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //  TODO: Check intent resume game
         // if Intent == newGame
@@ -40,13 +66,12 @@ public class GameActivity extends Activity {
 
         gameBoard.requestFocus();
 
-        String[] letts = Utilities.ShuffleGameLetters();
-
-        getButtons2();
+        //getButtons2();
     }
 
     private void InitTrayButtons()
     {
+        AdapterView<?> v;
         String[] letts = Utilities.ShuffleGameLetters();
         for (int i = 0; i < letts.length; i++)
 
