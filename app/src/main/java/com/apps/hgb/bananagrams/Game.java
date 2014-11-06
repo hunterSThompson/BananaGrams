@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Hunt on 9/28/2014.
  */
@@ -14,6 +17,7 @@ public class Game {
     /********************************************************************
      * Members
      ********************************************************************/
+    // TODO put all this game state into DataTransport class
     public GameTile[][] gameTiles = new GameTile[100][100];
 
     public int yStart;
@@ -23,6 +27,8 @@ public class Game {
 
     private GameTile SelectedTile = null;
     private GameActivity gameActivity;
+
+    private List<GameTile> TilesWithLetters = new ArrayList<GameTile>();
 
     /********************************************************************
      * Constructor
@@ -139,6 +145,7 @@ public class Game {
                 touchedTile.letter = "";
                 touchedTile.Selected = false;
                 touchedTile.HasLetter = false;
+                //todo remove from cached tiles
             }
             else
             {
@@ -154,6 +161,7 @@ public class Game {
     private void PopTile(GameTile gt)
     {
         //gameActivity.PopTile();
+        TilesWithLetters.remove(gt);
     }
 
     //
@@ -169,6 +177,10 @@ public class Game {
         SelectedTile.HasLetter = true;
         SelectedTile.Selected = false;
         SelectedTile = null;
+
+        // todo Add to cache tiles
+        TilesWithLetters.add(SelectedTile);
+
         return true;
     }
 
@@ -185,9 +197,24 @@ public class Game {
         return "";
     }
 
-    // TODO: Implement
+    // TODO: Implement. Move to Utils
     public boolean GameOver()
     {
+        for (int i = 0; i < TilesWithLetters.size(); i++)
+        {
+            // Get Above Tile
+            // Get Below Tile
+
+            // If Above.Empty && Below.HasLetter
+            //      while (tileBelow != empty)
+            //           letter.add
+            //      words.add(word)
+
+            // If Left.Empty && Right.HasLetter
+            //      while (tileRight != empty)
+            //           letter.add
+            //      words.add(word)
+        }
         return false;
     }
 }

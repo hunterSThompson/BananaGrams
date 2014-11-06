@@ -57,4 +57,15 @@ public final class Utilities {
 
         return ar;
     }
+
+    public static boolean LookUp(String word)
+    {
+        char firstLetter = 'a'; //= word.fir
+        switch(firstLetter)
+        {
+            case 'a':
+                break;
+        }
+        return true;
+    }
 }
