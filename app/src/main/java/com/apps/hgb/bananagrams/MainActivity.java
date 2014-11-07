@@ -22,6 +22,13 @@ public class MainActivity extends Activity {
         startActivity(i);
     }
 
+    public void continueGameClick(View v)
+    {
+        Intent i = new Intent(this, GameActivity.class);
+        i.putExtra("continueGame", true);
+        startActivity(i);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

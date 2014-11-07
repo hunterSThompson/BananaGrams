@@ -1,10 +1,13 @@
 package com.apps.hgb.bananagrams;
 
+import android.content.Context;
+
 /**
  * Created by Hunt on 9/28/2014.
  */
 // TODO Organize methods/members into correct sections
 public class Game {
+
     GameData GameData;
     private GameActivity gameActivity;
 
@@ -92,8 +95,8 @@ public class Game {
     private void InitializeGameData(String data)
     {
         // TODO Add error handling here
-        GameData = Utilities.Deserialize(data);
-        InitializeTiles();
+        //InitializeTiles();
+        GameData = Utilities.Deserialize(data, gameActivity);
 
         // Initialize view frame
         GameData.xStart = 47;
@@ -191,6 +194,8 @@ public class Game {
 
         // todo Add to cache tiles
         GameData.CachedTiles.add(GameData.SelectedTile);
+
+        Utilities.Serialize(GameData, gameActivity);
 
         return true;
     }

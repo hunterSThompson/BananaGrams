@@ -1,8 +1,16 @@
 package com.apps.hgb.bananagrams;
 
+import android.content.Context;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
 import java.io.OutputStreamWriter;
+import java.io.StreamCorruptedException;
 import java.util.Random;
 
 /**
@@ -63,42 +71,54 @@ public final class Utilities {
         return ar;
     }
 
-    public static GameData Deserialize(String data)
+    public static GameData Deserialize(String data, Context context)
     {
-        return null;
+        FileInputStream fis;
+        ObjectInputStream is;
+        GameData simpleClass = null;
+
+        try {
+            fis = context.openFileInput(Constants.ResumeFile);
+            is = new ObjectInputStream(fis);
+            simpleClass = (GameData) is.readObject();
+            is.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (OptionalDataException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return simpleClass;
     }
 
-    public static String Serialize(GameData gameData)
+    public static boolean Serialize(GameData gameData, Context context)
     {
-        String filename = Constants.ResumeFile;
-        FileOutputStream fos = null;
-        //ObjectOutputStream out = null;
-        /*
-        try {
-            fos = new FileOutputStream(Constants.ResumeFile);
-            out = new ObjectOutputStream(fos);
-            out.writeObject(gameData);
+        FileOutputStream fos;
+        ObjectOutputStream os;
 
-            out.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        };
-        */
-
-        // Write to file
         try
         {
-            //OutputStreamWriter out
-                    //= new OutputStreamWriter(openFileOutput(Constants.ResumeFile, MODE_PRIVATE));
-            //out.write("");
-            //out.close();
+            fos = context.openFileOutput(Constants.ResumeFile, Context.MODE_PRIVATE);
+            os = new ObjectOutputStream(fos);
+            os.writeObject(gameData);
+            os.close();
         }
-        catch (Throwable t) {
-            //Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG)
-                    //.show();
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return false;
         }
-
-        return "";
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     //

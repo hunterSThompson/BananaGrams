@@ -1,10 +1,12 @@
 package com.apps.hgb.bananagrams;
 
+import java.io.Serializable;
+
 /**
  * Created by Hunt on 9/29/2014.
  */
 
-public class GameTile {
+public class GameTile implements Serializable {
 
     public String letter;
 

@@ -29,10 +29,14 @@ public class GameActivity extends Activity {
         buttonTray = (LinearLayout) findViewById(R.id.ButtonContainer);
 
         //  TODO: Check intent resume game
+        boolean continuingGame = getIntent().getBooleanExtra("continueGame", false);
         // if Intent == newGame
-        game = new Game(this);
-        // else
-        // game = new Game(savedData);
+        if (!continuingGame)
+            game = new Game(this);
+        else
+        {
+            game = new Game(this, "");
+        }
 
         gameBoard = new GameBoard(this, game);
         gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
