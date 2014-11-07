@@ -1,5 +1,8 @@
 package com.apps.hgb.bananagrams;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Random;
 
 /**
@@ -9,10 +12,10 @@ public final class Utilities {
 
     static GameTile GetTouchedTile2(float x, float y, Game game, float height, float width)
     {
-        int xf = game.xStart + (int) (x / width / 6);
-        int yf = game.yStart + (int) (y / height / 6);
-        GameTile gt = game.gameTiles[xf][yf];
-        return game.gameTiles[xf][yf];
+        int xf = game.GameData.xStart + (int) (x / width / 6);
+        int yf = game.GameData.yStart + (int) (y / height / 6);
+        GameTile gt = game.GameData.gameTiles[xf][yf];
+        return game.GameData.gameTiles[xf][yf];
     }
 
     //TODO put this method in game class. Maybe refactor to use rect.Contains(x, y)
@@ -27,8 +30,8 @@ public final class Utilities {
         int xTileNum = (int) tileX;
         int yTileNum = (int) tileY;
 
-        int xf = xTileNum + game.xStart;
-        int yf = yTileNum + game.yStart;
+        int xf = xTileNum + game.GameData.xStart;
+        int yf = yTileNum + game.GameData.yStart;
 
         // TODO:  Throw WTF error here
         if ((xf | yf) > 100)
@@ -38,10 +41,13 @@ public final class Utilities {
         {
         }
 
-        GameTile gt = game.gameTiles[xf][yf];
-        return game.gameTiles[xf][yf];
+        GameTile gt = game.GameData.gameTiles[xf][yf];
+        return game.GameData.gameTiles[xf][yf];
     }
 
+    //
+    //  Randomly Scrabble letters
+    //
     public static String[] ShuffleGameLetters()
     {
         String[] ar = Constants.Letters;
@@ -49,7 +55,6 @@ public final class Utilities {
         for (int i = ar.length - 1; i > 0; i--)
         {
             int index = rnd.nextInt(i + 1);
-            // Simple swap
             String a = ar[index];
             ar[index] = ar[i];
             ar[i] = a;
@@ -58,6 +63,47 @@ public final class Utilities {
         return ar;
     }
 
+    public static GameData Deserialize(String data)
+    {
+        return null;
+    }
+
+    public static String Serialize(GameData gameData)
+    {
+        String filename = Constants.ResumeFile;
+        FileOutputStream fos = null;
+        //ObjectOutputStream out = null;
+        /*
+        try {
+            fos = new FileOutputStream(Constants.ResumeFile);
+            out = new ObjectOutputStream(fos);
+            out.writeObject(gameData);
+
+            out.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        };
+        */
+
+        // Write to file
+        try
+        {
+            //OutputStreamWriter out
+                    //= new OutputStreamWriter(openFileOutput(Constants.ResumeFile, MODE_PRIVATE));
+            //out.write("");
+            //out.close();
+        }
+        catch (Throwable t) {
+            //Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG)
+                    //.show();
+        }
+
+        return "";
+    }
+
+    //
+    //
+    //
     public static boolean LookUp(String word)
     {
         char firstLetter = 'a'; //= word.fir

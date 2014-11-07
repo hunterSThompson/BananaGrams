@@ -1,23 +1,19 @@
 package com.apps.hgb.bananagrams;
 
-import android.graphics.Color;
-import android.graphics.Point;
-import android.view.View;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Hunt on 9/28/2014.
  */
 // TODO Organize methods/members into correct sections
 public class Game {
+    GameData GameData;
+    private GameActivity gameActivity;
 
 
     /********************************************************************
      * Members
      ********************************************************************/
     // TODO put all this game state into DataTransport class
+    /*
     public GameTile[][] gameTiles = new GameTile[100][100];
 
     public int yStart;
@@ -29,6 +25,7 @@ public class Game {
     private GameActivity gameActivity;
 
     private List<GameTile> TilesWithLetters = new ArrayList<GameTile>();
+    */
 
     /********************************************************************
      * Constructor
@@ -41,19 +38,19 @@ public class Game {
         int numX = 0;
         int numY = 0;
 
-        int difX = Math.abs(this.xStart - this.xEnd);
-        int difY = Math.abs(this.yStart - this.yEnd);
+        int difX = Math.abs(GameData.xStart - GameData.xEnd);
+        int difY = Math.abs(GameData.yStart - GameData.yEnd);
 
         if (difX != 5 || difY != 5)
         {
             // TODO: The app should crash if our view frame isn't the right num of things...
         }
 
-        for (int i = this.xStart; i < this.xEnd; i++)
+        for (int i = GameData.xStart; i < GameData.xEnd; i++)
         {
-            for (int j = this.yStart; j < this.yEnd; j++)
+            for (int j = GameData.yStart; j < GameData.yEnd; j++)
             {
-                tilesToDraw[numX][numY] = this.gameTiles[i][j];
+                tilesToDraw[numX][numY] = GameData.gameTiles[i][j];
                 numY++;
             }
             numX++;
@@ -66,29 +63,43 @@ public class Game {
     // TODO: Implement Game constructor.  Should randomly generate tiles
     public Game(GameActivity gameActivity) {
         this.gameActivity = gameActivity;
-        InitializeGraphics();
+        InitializeGameData();
     }
 
     // TODO:
     public Game(GameActivity gameActivity, String data)
     {
         this.gameActivity = gameActivity;
-        //Deserialize()
+        InitializeGameData(data);
     }
 
 
     /********************************************************************
      * Public Methods
      ********************************************************************/
-    private void InitializeGraphics()
+    private void InitializeGameData()
     {
+        GameData = new GameData();
         InitializeTiles();
 
         // Initialize view frame
-        this.xStart = 47;
-        this.xEnd= 53;
-        this.yStart = 47;
-        this.yEnd = 53;
+        GameData.xStart = 47;
+        GameData.xEnd= 53;
+        GameData.yStart = 47;
+        GameData.yEnd = 53;
+    }
+
+    private void InitializeGameData(String data)
+    {
+        // TODO Add error handling here
+        GameData = Utilities.Deserialize(data);
+        InitializeTiles();
+
+        // Initialize view frame
+        GameData.xStart = 47;
+        GameData.xEnd= 53;
+        GameData.yStart = 47;
+        GameData.yEnd = 53;
     }
 
     private void InitializeTiles()
@@ -101,45 +112,45 @@ public class Game {
             }
         }
 
-        gameTiles = gts;
+        GameData.gameTiles = gts;
     }
 
     // TODO: Change these one method with switch later
     public void MoveLeft()
     {
-        xStart += 1;
-        xEnd += 1;
+        GameData.xStart += 1;
+        GameData.xEnd += 1;
     }
 
     public void MoveRight()
     {
-        xStart -= 1;
-        xEnd -= 1;
+        GameData.xStart -= 1;
+        GameData.xEnd -= 1;
     }
 
     public void MoveDown()
     {
-        yStart -= 1;
-        yEnd -= 1;
+        GameData.yStart -= 1;
+        GameData.yEnd -= 1;
     }
 
     public void MoveUp()
     {
-        yStart += 1;
-        yEnd += 1;
+        GameData.yStart += 1;
+        GameData.yEnd += 1;
     }
 
     public void BoardClick(float x, float y, float height, float width)
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
 
-        if (SelectedTile == null) {
+        if (GameData.SelectedTile == null) {
             touchedTile.Selected = true;
-            SelectedTile = touchedTile;
+            GameData.SelectedTile = touchedTile;
         }
         else
         {
-            if (SelectedTile == touchedTile)
+            if (GameData.SelectedTile == touchedTile)
             {
                 PopTile(touchedTile);
                 touchedTile.letter = "";
@@ -149,9 +160,9 @@ public class Game {
             }
             else
             {
-                SelectedTile.Selected = false;
+                GameData.SelectedTile.Selected = false;
             }
-            SelectedTile = null;
+            GameData.SelectedTile = null;
         }
     }
 
@@ -161,7 +172,7 @@ public class Game {
     private void PopTile(GameTile gt)
     {
         //gameActivity.PopTile();
-        TilesWithLetters.remove(gt);
+        GameData.CachedTiles.remove(gt);
     }
 
     //
@@ -170,16 +181,16 @@ public class Game {
     //
     public boolean AddTileToBoard(String letter)
     {
-        if (SelectedTile == null)
+        if (GameData.SelectedTile == null)
             return false;
 
-        SelectedTile.letter = letter;
-        SelectedTile.HasLetter = true;
-        SelectedTile.Selected = false;
-        SelectedTile = null;
+        GameData.SelectedTile.letter = letter;
+        GameData.SelectedTile.HasLetter = true;
+        GameData.SelectedTile.Selected = false;
+        GameData.SelectedTile = null;
 
         // todo Add to cache tiles
-        TilesWithLetters.add(SelectedTile);
+        GameData.CachedTiles.add(GameData.SelectedTile);
 
         return true;
     }
@@ -200,7 +211,7 @@ public class Game {
     // TODO: Implement. Move to Utils
     public boolean GameOver()
     {
-        for (int i = 0; i < TilesWithLetters.size(); i++)
+        for (int i = 0; i < GameData.CachedTiles.size(); i++)
         {
             // Get Above Tile
             // Get Below Tile

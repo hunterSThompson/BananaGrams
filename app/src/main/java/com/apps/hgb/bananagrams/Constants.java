@@ -19,4 +19,6 @@ public final class Constants {
         "D", "D", "D", "D",
         "G", "G", "G", "G",
     };
+
+    public static String ResumeFile = "Resume.txt";
 }
