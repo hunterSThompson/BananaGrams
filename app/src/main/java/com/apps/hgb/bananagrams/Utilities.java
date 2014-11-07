@@ -75,25 +75,41 @@ public final class Utilities {
     {
         FileInputStream fis;
         ObjectInputStream is;
-        GameData simpleClass = null;
+        GameData gameData = null;
 
         try {
             fis = context.openFileInput(Constants.ResumeFile);
             is = new ObjectInputStream(fis);
-            simpleClass = (GameData) is.readObject();
+            gameData = (GameData) is.readObject();
             is.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (OptionalDataException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return simpleClass;
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        catch (OptionalDataException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        catch (StreamCorruptedException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+
+        return gameData;
     }
 
     public static boolean Serialize(GameData gameData, Context context)

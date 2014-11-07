@@ -94,9 +94,12 @@ public class Game {
 
     private void InitializeGameData(String data)
     {
-        // TODO Add error handling here
-        //InitializeTiles();
         GameData = Utilities.Deserialize(data, gameActivity);
+
+        if (GameData == null)
+            InitializeGameData();
+
+        //if (!success || GameData == null)
 
         // Initialize view frame
         GameData.xStart = 47;
