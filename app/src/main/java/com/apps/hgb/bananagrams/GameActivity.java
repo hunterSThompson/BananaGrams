@@ -30,12 +30,11 @@ public class GameActivity extends Activity {
 
         //  TODO: Check intent resume game
         boolean continuingGame = getIntent().getBooleanExtra("continueGame", false);
-        // if Intent == newGame
-        if (!continuingGame)
-            game = new Game(this);
+        if (continuingGame)
+            game = new Game(this, true);
         else
         {
-            game = new Game(this, "");
+            game = new Game(this, false);
         }
 
         gameBoard = new GameBoard(this, game);

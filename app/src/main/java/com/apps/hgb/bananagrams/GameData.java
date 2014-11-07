@@ -17,7 +17,6 @@ public class GameData implements Serializable {
     public int yEnd;
 
     public GameTile SelectedTile = null;
-    //public GameActivity gameActivity;
 
     public List<GameTile> CachedTiles = new ArrayList<GameTile>();
 }

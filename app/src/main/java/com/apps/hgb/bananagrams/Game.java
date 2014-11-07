@@ -8,31 +8,17 @@ import android.content.Context;
 // TODO Organize methods/members into correct sections
 public class Game {
 
-    GameData GameData;
-    private GameActivity gameActivity;
-
-
     /********************************************************************
      * Members
      ********************************************************************/
-    // TODO put all this game state into DataTransport class
-    /*
-    public GameTile[][] gameTiles = new GameTile[100][100];
 
-    public int yStart;
-    public int xStart;
-    public int xEnd;
-    public int yEnd;
-
-    private GameTile SelectedTile = null;
+    public GameData GameData;
     private GameActivity gameActivity;
-
-    private List<GameTile> TilesWithLetters = new ArrayList<GameTile>();
-    */
 
     /********************************************************************
      * Constructor
     ********************************************************************/
+
     // TODO Add error handling for out of index array
     public GameTile[][] GetVisibleLetters() {
 
@@ -63,17 +49,20 @@ public class Game {
         return tilesToDraw;
     }
 
-    // TODO: Implement Game constructor.  Should randomly generate tiles
+    // TODO: Should randomly generate tiles
     public Game(GameActivity gameActivity) {
         this.gameActivity = gameActivity;
         InitializeGameData();
     }
 
-    // TODO:
-    public Game(GameActivity gameActivity, String data)
+    // TODO: Refactor to different functions
+    public Game(GameActivity gameActivity, Boolean continuingGame)
     {
         this.gameActivity = gameActivity;
-        InitializeGameData(data);
+        if (continuingGame)
+            InitializeGameData("");
+        else
+            InitializeGameData();
     }
 
 
@@ -98,14 +87,6 @@ public class Game {
 
         if (GameData == null)
             InitializeGameData();
-
-        //if (!success || GameData == null)
-
-        // Initialize view frame
-        GameData.xStart = 47;
-        GameData.xEnd= 53;
-        GameData.yStart = 47;
-        GameData.yEnd = 53;
     }
 
     private void InitializeTiles()
@@ -219,6 +200,9 @@ public class Game {
     // TODO: Implement. Move to Utils
     public boolean GameOver()
     {
+        //if (gameActivity.IsTrayEmpty())
+        //    return false;
+
         for (int i = 0; i < GameData.CachedTiles.size(); i++)
         {
             // Get Above Tile
