@@ -26,9 +26,10 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // TODO get rid of crap
         buttonTray = (LinearLayout) findViewById(R.id.ButtonContainer);
 
-        //  TODO: Check intent resume game
+        // Continue or start New Game
         boolean continuingGame = getIntent().getBooleanExtra("continueGame", false);
         if (continuingGame)
             game = new Game(this, true);

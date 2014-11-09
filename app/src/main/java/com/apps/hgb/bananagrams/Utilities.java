@@ -18,14 +18,6 @@ import java.util.Random;
  */
 public final class Utilities {
 
-    static GameTile GetTouchedTile2(float x, float y, Game game, float height, float width)
-    {
-        int xf = game.GameData.xStart + (int) (x / width / 6);
-        int yf = game.GameData.yStart + (int) (y / height / 6);
-        GameTile gt = game.GameData.gameTiles[xf][yf];
-        return game.GameData.gameTiles[xf][yf];
-    }
-
     //TODO put this method in game class. Maybe refactor to use rect.Contains(x, y)
     static GameTile GetTouchedTile(float x, float y, Game game, float height, float width)
     {

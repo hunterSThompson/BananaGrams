@@ -13,8 +13,13 @@ public class GameTile implements Serializable {
     public boolean Selected;
     public boolean HasLetter;
 
-    public GameTile()
+    public int X;
+    public int Y;
+
+    public GameTile(int x, int y)
     {
+        this.X = x;
+        this.Y = y;
         letter = "";
         Selected = false;
         HasLetter = false;
@@ -28,13 +33,6 @@ public class GameTile implements Serializable {
         this.Selected = selected;
         this.HasLetter = hasLetter;
     }
-
-    /*
-    public void Delete()
-    {
-        this.letter = "";
-    }
-    */
 
     public void SetLetter(String letter)
     {

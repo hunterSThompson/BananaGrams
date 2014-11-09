@@ -10,7 +10,6 @@ import android.view.View;
  */
 public class GameBoard extends View {
 
-    GameActivity gameActivity;
     Graphics graphics;
     Game game;
 
@@ -18,8 +17,6 @@ public class GameBoard extends View {
         super(context);
 
         graphics = new Graphics();
-        gameActivity = (GameActivity) context;
-
         game = _game;
 
         setFocusable(true);
@@ -29,12 +26,6 @@ public class GameBoard extends View {
     public void Invalidate()
     {
         invalidate();
-    }
-
-    //  TODO: Implement continue game constructor
-    public GameBoard(Context context, String savedGameData)
-    {
-        super(context);
     }
 
     @Override

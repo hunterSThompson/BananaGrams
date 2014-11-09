@@ -19,44 +19,6 @@ public class Game {
      * Constructor
     ********************************************************************/
 
-    // TODO Add error handling for out of index array
-    public GameTile[][] GetVisibleLetters() {
-
-        GameTile[][] tilesToDraw = new GameTile[6][6];
-
-        int numX = 0;
-        int numY = 0;
-
-        int difX = Math.abs(GameData.xStart - GameData.xEnd);
-        int difY = Math.abs(GameData.yStart - GameData.yEnd);
-
-        if (difX != 5 || difY != 5)
-        {
-            // TODO: The app should crash if our view frame isn't the right num of things...
-        }
-
-        for (int i = GameData.xStart; i < GameData.xEnd; i++)
-        {
-            for (int j = GameData.yStart; j < GameData.yEnd; j++)
-            {
-                tilesToDraw[numX][numY] = GameData.gameTiles[i][j];
-                numY++;
-            }
-            numX++;
-            numY = 0;
-        }
-
-        return tilesToDraw;
-    }
-
-    // TODO: Should randomly generate tiles
-    public Game(GameActivity gameActivity) {
-        this.gameActivity = gameActivity;
-        InitializeGameData();
-    }
-
-    // TODO: Refactor constructor to different functions
-
     //
     //  Pass continuing game as true if resuming.
     //
@@ -99,7 +61,7 @@ public class Game {
 
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
-                gts[i][j] = new GameTile();
+                gts[i][j] = new GameTile(i, j);
             }
         }
 
@@ -157,6 +119,36 @@ public class Game {
         }
     }
 
+    // TODO Add error handling for out of index array
+    public GameTile[][] GetVisibleLetters() {
+
+        GameTile[][] tilesToDraw = new GameTile[6][6];
+
+        int numX = 0;
+        int numY = 0;
+
+        int difX = Math.abs(GameData.xStart - GameData.xEnd);
+        int difY = Math.abs(GameData.yStart - GameData.yEnd);
+
+        if (difX != 5 || difY != 5)
+        {
+            // TODO: The app should crash if our view frame isn't the right num of things...
+        }
+
+        for (int i = GameData.xStart; i < GameData.xEnd; i++)
+        {
+            for (int j = GameData.yStart; j < GameData.yEnd; j++)
+            {
+                tilesToDraw[numX][numY] = GameData.gameTiles[i][j];
+                numY++;
+            }
+            numX++;
+            numY = 0;
+        }
+
+        return tilesToDraw;
+    }
+
     //
     //  Move tile from Board to Tray
     //
@@ -180,11 +172,7 @@ public class Game {
         GameData.SelectedTile.Selected = false;
         GameData.SelectedTile = null;
 
-        // todo Add to cache tiles
         GameData.CachedTiles.add(GameData.SelectedTile);
-
-        //Utilities.Serialize(GameData, gameActivity);
-
         return true;
     }
 
@@ -192,18 +180,6 @@ public class Game {
     {
         if (GameData != null)
             Utilities.Serialize(GameData, gameActivity);
-    }
-
-    // TODO: Implement
-    private Game Deserialize(String data)
-    {
-        return null;
-    }
-
-    // TODO: Implement
-    private String Serialize()
-    {
-        return "";
     }
 
     // TODO: Implement. Move to Utils
