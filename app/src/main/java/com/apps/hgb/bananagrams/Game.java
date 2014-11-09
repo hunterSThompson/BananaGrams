@@ -2,6 +2,9 @@ package com.apps.hgb.bananagrams;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Hunt on 9/28/2014.
  */
@@ -109,7 +112,6 @@ public class Game {
                 touchedTile.letter = "";
                 touchedTile.Selected = false;
                 touchedTile.HasLetter = false;
-                //todo remove from cached tiles
             }
             else
             {
@@ -188,54 +190,40 @@ public class Game {
         //if (gameActivity.IsTrayEmpty())
         //    return false;
 
+        List<GameTile> verticals = new ArrayList<GameTile>();
+        List<GameTile> horizontal = new ArrayList<GameTile>();
+
         GameTile above, below, left, right;
-        for (int i = 0; i < GameData.CachedTiles.size(); i++)
+        for (GameTile gameTile : GameData.CachedTiles)
         {
-            // Get Above Tile
-            // Get Below Tile
+            above = Utilities.GetNeighborTile(GameData, gameTile, Direction.Up);
+            below = Utilities.GetNeighborTile(GameData, gameTile, Direction.Down);
+            left = Utilities.GetNeighborTile(GameData, gameTile, Direction.Left);
+            right = Utilities.GetNeighborTile(GameData, gameTile, Direction.Right);
 
-            // If Above.Empty && Below.HasLetter
-            //      while (tileBelow != empty)
-            //           letter.add
-            //      words.add(word)
+            if (above == null && below != null)
+                verticals.add(gameTile);
 
-            // If Left.Empty && Right.HasLetter
-            //      while (tileRight != empty)
-            //           letter.add
-            //      words.add(word)
+            if (left == null && right != null)
+                horizontal.add(gameTile);
         }
-        return false;
-    }
 
-    //
-    //
-    //
-    public GameTile GetNeighborTile(GameTile gameTile, Direction direction) {
-        int X = gameTile.X;
-        int Y = gameTile.Y;
-
-        boolean xInBound = (X >= 0) && (X < 100);
-        boolean yInBound = (Y >= 0) && (Y < 100);
-
-        if (!xInBound || !yInBound)
-            return null;
-
-        if (direction == Direction.Down)
+        for (GameTile gameTile : verticals)
         {
-            return GameData.gameTiles[gameTile.X][gameTile.Y - 1];
+            String word = Utilities.getLetters(gameTile, GameData, Direction.Down);
+            boolean validWord = Utilities.LookUp(word);
+            if (!validWord)
+                return false;
         }
-        else if (direction == Direction.Up)
+
+        for (GameTile gameTile : horizontal)
         {
-            return GameData.gameTiles[gameTile.X][gameTile.Y + 1];
+            String word = Utilities.getLetters(gameTile, GameData, Direction.Right);
+            boolean validWord = Utilities.LookUp(word);
+            if (!validWord)
+                return false;
         }
-        else if (direction == Direction.Left)
-        {
-            return GameData.gameTiles[gameTile.X - 1][gameTile.Y];
-        }
-        else if (direction == Direction.Right)
-        {
-            return GameData.gameTiles[gameTile.X + 1][gameTile.Y];
-        }
-        else return null;
+
+        return true;
     }
 }

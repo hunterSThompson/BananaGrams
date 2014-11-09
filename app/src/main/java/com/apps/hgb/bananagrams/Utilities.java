@@ -142,4 +142,51 @@ public final class Utilities {
         }
         return true;
     }
+
+    //
+    //
+    //
+    static public GameTile GetNeighborTile(GameData gameData, GameTile gameTile, Direction direction) {
+        int X = gameTile.X;
+        int Y = gameTile.Y;
+
+        boolean xInBound = (X >= 0) && (X < 100);
+        boolean yInBound = (Y >= 0) && (Y < 100);
+
+        if (!xInBound || !yInBound)
+            return null;
+
+        if (direction == Direction.Down)
+        {
+            return gameData.gameTiles[gameTile.X][gameTile.Y - 1];
+        }
+        else if (direction == Direction.Up)
+        {
+            return gameData.gameTiles[gameTile.X][gameTile.Y + 1];
+        }
+        else if (direction == Direction.Left)
+        {
+            return gameData.gameTiles[gameTile.X - 1][gameTile.Y];
+        }
+        else if (direction == Direction.Right)
+        {
+            return gameData.gameTiles[gameTile.X + 1][gameTile.Y];
+        }
+        else return null;
+    }
+
+   static public String getLetters(GameTile target, GameData gameData, Direction direction)
+   {
+       String word = target.letter;
+       GameTile tileToTheRight;
+       while (true)
+       {
+           tileToTheRight = GetNeighborTile(gameData, target, direction);
+           if (tileToTheRight != null || tileToTheRight.HasLetter)
+                word += tileToTheRight.letter;
+           else
+               break;
+       }
+       return word;
+   }
 }
