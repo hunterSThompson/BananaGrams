@@ -188,6 +188,7 @@ public class Game {
         //if (gameActivity.IsTrayEmpty())
         //    return false;
 
+        GameTile above, below, left, right;
         for (int i = 0; i < GameData.CachedTiles.size(); i++)
         {
             // Get Above Tile
@@ -204,5 +205,37 @@ public class Game {
             //      words.add(word)
         }
         return false;
+    }
+
+    //
+    //
+    //
+    public GameTile GetNeighborTile(GameTile gameTile, Direction direction) {
+        int X = gameTile.X;
+        int Y = gameTile.Y;
+
+        boolean xInBound = (X >= 0) && (X < 100);
+        boolean yInBound = (Y >= 0) && (Y < 100);
+
+        if (!xInBound || !yInBound)
+            return null;
+
+        if (direction == Direction.Down)
+        {
+            return GameData.gameTiles[gameTile.X][gameTile.Y - 1];
+        }
+        else if (direction == Direction.Up)
+        {
+            return GameData.gameTiles[gameTile.X][gameTile.Y + 1];
+        }
+        else if (direction == Direction.Left)
+        {
+            return GameData.gameTiles[gameTile.X - 1][gameTile.Y];
+        }
+        else if (direction == Direction.Right)
+        {
+            return GameData.gameTiles[gameTile.X + 1][gameTile.Y];
+        }
+        else return null;
     }
 }
