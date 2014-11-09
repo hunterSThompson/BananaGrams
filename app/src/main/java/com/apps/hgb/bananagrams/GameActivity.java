@@ -33,9 +33,7 @@ public class GameActivity extends Activity {
         if (continuingGame)
             game = new Game(this, true);
         else
-        {
             game = new Game(this, false);
-        }
 
         gameBoard = new GameBoard(this, game);
         gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
@@ -46,6 +44,21 @@ public class GameActivity extends Activity {
         String[] letts = Utilities.ShuffleGameLetters();
 
         getButtons2();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if (game == null)
+            game = new Game(this, true);
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (game != null)
+            game.SaveState();
     }
 
     private void InitTrayButtons()

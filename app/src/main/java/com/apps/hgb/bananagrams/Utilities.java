@@ -71,7 +71,7 @@ public final class Utilities {
         return ar;
     }
 
-    public static GameData Deserialize(String data, Context context)
+    public static GameData Deserialize(Context context)
     {
         FileInputStream fis;
         ObjectInputStream is;

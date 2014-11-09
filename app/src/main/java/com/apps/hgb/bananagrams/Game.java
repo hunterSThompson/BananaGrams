@@ -55,12 +55,16 @@ public class Game {
         InitializeGameData();
     }
 
-    // TODO: Refactor to different functions
+    // TODO: Refactor constructor to different functions
+
+    //
+    //  Pass continuing game as true if resuming.
+    //
     public Game(GameActivity gameActivity, Boolean continuingGame)
     {
         this.gameActivity = gameActivity;
         if (continuingGame)
-            InitializeGameData("");
+            LoadSavedState();
         else
             InitializeGameData();
     }
@@ -81,9 +85,9 @@ public class Game {
         GameData.yEnd = 53;
     }
 
-    private void InitializeGameData(String data)
+    private void LoadSavedState()
     {
-        GameData = Utilities.Deserialize(data, gameActivity);
+        GameData = Utilities.Deserialize(gameActivity);
 
         if (GameData == null)
             InitializeGameData();
@@ -179,11 +183,16 @@ public class Game {
         // todo Add to cache tiles
         GameData.CachedTiles.add(GameData.SelectedTile);
 
-        Utilities.Serialize(GameData, gameActivity);
+        //Utilities.Serialize(GameData, gameActivity);
 
         return true;
     }
 
+    public void SaveState()
+    {
+        if (GameData != null)
+            Utilities.Serialize(GameData, gameActivity);
+    }
 
     // TODO: Implement
     private Game Deserialize(String data)
