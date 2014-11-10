@@ -134,10 +134,6 @@ public class GameActivity extends Activity {
         });
     }
 
-    private void InitializeTileButtons()
-    {
-    }
-
     public void rightClick(View v)
     {
         game.MoveRight();

@@ -44,10 +44,10 @@ public class Game {
         InitializeTiles();
 
         // Initialize view frame
-        GameData.xStart = 47;
-        GameData.xEnd= 53;
-        GameData.yStart = 47;
-        GameData.yEnd = 53;
+        GameData.xStart = Constants.newGameXStart;
+        GameData.xEnd= Constants.newGameXEnd;
+        GameData.yStart = Constants.newGameYStart;
+        GameData.yEnd = Constants.newGameYEnd;
     }
 
     private void LoadSavedState()
@@ -60,10 +60,10 @@ public class Game {
 
     private void InitializeTiles()
     {
-        GameTile[][] gts = new GameTile[100][100];
+        GameTile[][] gts = new GameTile[Constants.boardWidth][Constants.boardHeight];
 
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
+        for (int i = 0; i < Constants.boardWidth; i++) {
+            for (int j = 0; j < Constants.boardHeight; j++) {
                 gts[i][j] = new GameTile(i, j);
             }
         }
@@ -193,6 +193,7 @@ public class Game {
         List<GameTile> verticals = new ArrayList<GameTile>();
         List<GameTile> horizontal = new ArrayList<GameTile>();
 
+        // Find each starting Tile of Vertical/Horizontal words
         GameTile above, below, left, right;
         for (GameTile gameTile : GameData.CachedTiles)
         {

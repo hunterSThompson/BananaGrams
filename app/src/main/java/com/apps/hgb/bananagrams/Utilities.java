@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public final class Utilities {
 
-    //TODO put this method in game class. Maybe refactor to use rect.Contains(x, y)
+    //TODO refactor to take GameData instead of Game object. sloppy
     static GameTile GetTouchedTile(float x, float y, Game game, float height, float width)
     {
         float cellWidth = width / 6;

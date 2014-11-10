@@ -42,6 +42,7 @@ public class Graphics {
         DrawLetters(canvas, height, width, game);
     }
 
+    // TODO move alot of these nums to Constants file
     private void DrawLetters(Canvas canvas, int height, int width, Game game)
     {
         GameTile[][] gameTiles = game.GetVisibleLetters();
@@ -68,7 +69,7 @@ public class Graphics {
         if (gameTile == null)
             return;
 
-        Paint colorToPaint = null;
+        Paint colorToPaint;
 
         if (gameTile.Selected)
             colorToPaint = selectedTileGreen;
@@ -77,6 +78,7 @@ public class Graphics {
 
         String letter = gameTile.letter;
 
+        // todo fix this render code to put letters in right fucking place.
         float textHeight = textColor.measureText(letter, 0, letter.length());
         float x = rect.left; // + rect.width(); // 2f; // 4;
         float y = rect.top + textHeight; // / 2;

@@ -1,5 +1,6 @@
 package com.apps.hgb.bananagrams;
 
+
 import java.io.Serializable;
 
 /**
@@ -13,8 +14,8 @@ public class GameTile implements Serializable {
     public boolean Selected;
     public boolean HasLetter;
 
-    public int X;
-    public int Y;
+    public static int X;
+    public static int Y;
 
     public GameTile(int x, int y)
     {

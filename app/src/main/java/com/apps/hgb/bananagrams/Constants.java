@@ -21,4 +21,12 @@ public final class Constants {
     };
 
     public static String ResumeFile = "Resume.txt";
+
+    public static int newGameXStart = 47;
+    public static int newGameXEnd = 53;
+    public static int newGameYStart = 47;
+    public static int newGameYEnd = 53;
+
+    public static int boardWidth = 100;
+    public static int boardHeight = 100;
 }
