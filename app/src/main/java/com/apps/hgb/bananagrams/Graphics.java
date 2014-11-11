@@ -50,14 +50,16 @@ public class Graphics {
         float top, bottom, left, right;
         RectF rect;
 
-        for (int i = 0; i < 6; i ++)
+        float n = (float) Constants.TileGridLength;
+
+        for (int i = 0; i < Constants.TileGridLength; i++)
         {
-            top = height * (i/6f) + 4f;
-            bottom = height * ((i+1)/6f) - 4f;
-            for (int j = 0; j < 6; j++)
+            top = height * (i/n) + 4f;
+            bottom = height * ((i+1)/n) - 4f;
+            for (int j = 0; j < Constants.TileGridLength; j++)
             {
-                left = width * (j/6f) + 4f;
-                right = width * ((j+1)/6f) - 4f;
+                left = width * (j/n) + 4f;
+                right = width * ((j+1)/n) - 4f;
                 rect = new RectF(left, top, right, bottom);
                 Draw(canvas, rect, gameTiles[j][i]);
             }

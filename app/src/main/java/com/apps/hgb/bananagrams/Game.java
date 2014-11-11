@@ -44,10 +44,17 @@ public class Game {
         InitializeTiles();
 
         // Initialize view frame
+        /*
         GameData.xStart = Constants.newGameXStart;
         GameData.xEnd= Constants.newGameXEnd;
         GameData.yStart = Constants.newGameYStart;
         GameData.yEnd = Constants.newGameYEnd;
+        */
+
+        GameData.xStart = 50 - Constants.TileGridLength / 2;
+        GameData.xEnd = 50 + Constants.TileGridLength /2;
+        GameData.yStart = 50 - Constants.TileGridLength /2;
+        GameData.yEnd = 50 + Constants.TileGridLength /2;
     }
 
     private void LoadSavedState()
@@ -124,7 +131,7 @@ public class Game {
     // TODO Add error handling for out of index array
     public GameTile[][] GetVisibleLetters() {
 
-        GameTile[][] tilesToDraw = new GameTile[6][6];
+        GameTile[][] tilesToDraw = new GameTile[Constants.TileGridLength][Constants.TileGridLength];
 
         int numX = 0;
         int numY = 0;
@@ -137,15 +144,19 @@ public class Game {
             // TODO: The app should crash if our view frame isn't the right num of things...
         }
 
-        for (int i = GameData.xStart; i < GameData.xEnd; i++)
-        {
-            for (int j = GameData.yStart; j < GameData.yEnd; j++)
-            {
-                tilesToDraw[numX][numY] = GameData.gameTiles[i][j];
-                numY++;
+        try {
+            for (int i = GameData.xStart; i < GameData.xEnd; i++) {
+                for (int j = GameData.yStart; j < GameData.yEnd; j++) {
+                    tilesToDraw[numX][numY] = GameData.gameTiles[i][j];
+                    numY++;
+                }
+                numX++;
+                numY = 0;
             }
-            numX++;
-            numY = 0;
+        }
+        catch(Exception e)
+        {
+            String mess = e.getMessage();
         }
 
         return tilesToDraw;

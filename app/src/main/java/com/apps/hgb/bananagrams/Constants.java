@@ -29,4 +29,6 @@ public final class Constants {
 
     public static int boardWidth = 100;
     public static int boardHeight = 100;
+
+    public static int TileGridLength = 8;
 }

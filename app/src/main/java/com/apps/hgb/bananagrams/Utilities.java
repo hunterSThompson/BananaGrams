@@ -21,8 +21,9 @@ public final class Utilities {
     //TODO refactor to take GameData instead of Game object. sloppy
     static GameTile GetTouchedTile(float x, float y, Game game, float height, float width)
     {
-        float cellWidth = width / 6;
-        float cellHeight = height / 6;
+        int n = Constants.TileGridLength;
+        float cellWidth = width / n;
+        float cellHeight = height / n;
 
         float tileX = x / cellWidth;
         float tileY = y / cellHeight;
