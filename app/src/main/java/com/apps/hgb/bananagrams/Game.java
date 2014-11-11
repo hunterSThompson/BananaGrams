@@ -115,7 +115,7 @@ public class Game {
         {
             if (GameData.SelectedTile == touchedTile)
             {
-                PopTile(touchedTile);
+                //PopTile(touchedTile);
                 touchedTile.letter = "";
                 touchedTile.Selected = false;
                 touchedTile.HasLetter = false;
@@ -126,6 +126,8 @@ public class Game {
             }
             GameData.SelectedTile = null;
         }
+
+        //boolean g = GameOver();
     }
 
     // TODO Add error handling for out of index array
@@ -183,9 +185,11 @@ public class Game {
         GameData.SelectedTile.letter = letter;
         GameData.SelectedTile.HasLetter = true;
         GameData.SelectedTile.Selected = false;
-        GameData.SelectedTile = null;
 
         GameData.CachedTiles.add(GameData.SelectedTile);
+
+        GameData.SelectedTile = null;
+
         return true;
     }
 
@@ -213,10 +217,10 @@ public class Game {
             left = Utilities.GetNeighborTile(GameData, gameTile, Direction.Left);
             right = Utilities.GetNeighborTile(GameData, gameTile, Direction.Right);
 
-            if (above == null && below != null)
+            if (!above.HasLetter && below.HasLetter)
                 verticals.add(gameTile);
 
-            if (left == null && right != null)
+            if (!left.HasLetter && right.HasLetter)
                 horizontal.add(gameTile);
         }
 

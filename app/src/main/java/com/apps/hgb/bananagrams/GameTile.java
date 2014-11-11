@@ -14,8 +14,8 @@ public class GameTile implements Serializable {
     public boolean Selected;
     public boolean HasLetter;
 
-    public static int X;
-    public static int Y;
+    public int X;
+    public int Y;
 
     public GameTile(int x, int y)
     {

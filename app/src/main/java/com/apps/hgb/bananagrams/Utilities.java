@@ -157,23 +157,23 @@ public final class Utilities {
         if (!xInBound || !yInBound)
             return null;
 
-        if (direction == Direction.Down)
-        {
-            return gameData.gameTiles[gameTile.X][gameTile.Y - 1];
+        try {
+            if (direction == Direction.Down) {
+                return gameData.gameTiles[gameTile.X][gameTile.Y - 1];
+            } else if (direction == Direction.Up) {
+                return gameData.gameTiles[gameTile.X][gameTile.Y + 1];
+            } else if (direction == Direction.Left) {
+                return gameData.gameTiles[gameTile.X - 1][gameTile.Y];
+            } else if (direction == Direction.Right) {
+                return gameData.gameTiles[gameTile.X + 1][gameTile.Y];
+            }
+            else return null;
         }
-        else if (direction == Direction.Up)
+        catch (Exception e)
         {
-            return gameData.gameTiles[gameTile.X][gameTile.Y + 1];
+            String message = e.getMessage();
         }
-        else if (direction == Direction.Left)
-        {
-            return gameData.gameTiles[gameTile.X - 1][gameTile.Y];
-        }
-        else if (direction == Direction.Right)
-        {
-            return gameData.gameTiles[gameTile.X + 1][gameTile.Y];
-        }
-        else return null;
+        return null;
     }
 
    static public String getLetters(GameTile target, GameData gameData, Direction direction)
