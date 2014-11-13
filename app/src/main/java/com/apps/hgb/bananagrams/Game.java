@@ -108,21 +108,17 @@ public class Game {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
 
         if (GameData.SelectedTile == null) {
-            touchedTile.Selected = true;
+            touchedTile.Select();
             GameData.SelectedTile = touchedTile;
         }
         else
         {
-            if (GameData.SelectedTile == touchedTile)
-            {
+            if (GameData.SelectedTile == touchedTile) {
                 //PopTile(touchedTile);
-                touchedTile.letter = "";
-                touchedTile.Selected = false;
-                touchedTile.HasLetter = false;
+                touchedTile.ClearTile();
             }
-            else
-            {
-                GameData.SelectedTile.Selected = false;
+            else {
+                GameData.SelectedTile.UnSelect();
             }
             GameData.SelectedTile = null;
         }
@@ -182,12 +178,8 @@ public class Game {
         if (GameData.SelectedTile == null)
             return false;
 
-        GameData.SelectedTile.letter = letter;
-        GameData.SelectedTile.HasLetter = true;
-        GameData.SelectedTile.Selected = false;
-
+        GameData.SelectedTile.SetLetter(letter);
         GameData.CachedTiles.add(GameData.SelectedTile);
-
         GameData.SelectedTile = null;
 
         return true;
