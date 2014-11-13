@@ -26,6 +26,30 @@ public class GameTile implements Serializable {
         HasLetter = false;
     }
 
+    public void ClearTile()
+    {
+        this.letter = "";
+        this.HasLetter = false;
+        this.Selected = false;
+    }
+
+    public void UnSelect()
+    {
+        this.Selected = false;
+    }
+
+    public void Select()
+    {
+        this.Selected = true;
+    }
+
+    public void SetLetter(String letter)
+    {
+        this.HasLetter = true;
+        this.Selected = false;
+        this.letter = letter;
+    }
+
     // TODO Add methods for Delete/Highlight/Unhighlight
 
     public GameTile(String letter, boolean selected, boolean hasLetter)
@@ -35,9 +59,5 @@ public class GameTile implements Serializable {
         this.HasLetter = hasLetter;
     }
 
-    public void SetLetter(String letter)
-    {
-        this.letter = letter;
-    }
 }
 
