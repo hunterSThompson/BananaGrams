@@ -64,7 +64,7 @@ public class GameActivity extends Activity {
     // TODO implement
     public boolean IsTrayEmpty()
     {
-        return true;
+        return false;
     }
 
     private void getButtons2()

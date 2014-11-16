@@ -1,17 +1,20 @@
 package com.apps.hgb.bananagrams;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.OutputStreamWriter;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -135,19 +138,42 @@ public final class Utilities {
     //
     //
     //
-    public static boolean LookUp(String word)
+    public static boolean LookUp(String word, Resources res)
     {
+        /*
         char firstLetter = 'a'; //= word.fir
         switch(firstLetter)
         {
             case 'a':
                 break;
         }
-        return true;
+        */
+
+        try
+        {
+            InputStream in_s = res.openRawResource(R.raw.wordlist);
+            byte[] b = new byte[in_s.available()];
+            in_s.read(b);
+            String s = new String(b);
+
+            String[] words = s.split("\n");
+
+            int index = Arrays.binarySearch(words, word.toLowerCase());
+
+            if (index > -1)
+                return true;
+            else
+                return false;
+
+        }
+        catch (Exception e)
+        {
+            // TODO: add logging here
+            return false;
+        }
     }
 
-    // TODO: Implement. Move to Utils
-    public static boolean GameOver(GameData GameData)
+    public static boolean GameOver(GameData GameData, Resources resources)
     {
         List<GameTile> verticals = new ArrayList<GameTile>();
         List<GameTile> horizontal = new ArrayList<GameTile>();
@@ -156,10 +182,10 @@ public final class Utilities {
         GameTile above, below, left, right;
         for (GameTile gameTile : GameData.CachedTiles)
         {
-            above = Utilities.GetNeighborTile(GameData, gameTile, Direction.Up);
-            below = Utilities.GetNeighborTile(GameData, gameTile, Direction.Down);
-            left = Utilities.GetNeighborTile(GameData, gameTile, Direction.Left);
-            right = Utilities.GetNeighborTile(GameData, gameTile, Direction.Right);
+            above = GetNeighborTile(GameData, gameTile, Direction.Up);
+            below = GetNeighborTile(GameData, gameTile, Direction.Down);
+            left = GetNeighborTile(GameData, gameTile, Direction.Left);
+            right = GetNeighborTile(GameData, gameTile, Direction.Right);
 
             if (!above.HasLetter && below.HasLetter)
                 verticals.add(gameTile);
@@ -173,7 +199,7 @@ public final class Utilities {
         for (GameTile gameTile : verticals)
         {
             String word = Utilities.getLetters(gameTile, GameData, Direction.Down);
-            boolean validWord = Utilities.LookUp(word);
+            boolean validWord = Utilities.LookUp(word, resources);
             if (!validWord)
                 return false;
         }
@@ -181,7 +207,7 @@ public final class Utilities {
         for (GameTile gameTile : horizontal)
         {
             String word = Utilities.getLetters(gameTile, GameData, Direction.Right);
-            boolean validWord = Utilities.LookUp(word);
+            boolean validWord = Utilities.LookUp(word, resources);
             if (!validWord)
                 return false;
         }

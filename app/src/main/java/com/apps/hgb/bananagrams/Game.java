@@ -107,22 +107,27 @@ public class Game {
         }
         else
         {
-            if (GameData.SelectedTile == touchedTile) {
+            if (GameData.SelectedTile == touchedTile)
+            {
                 //PopTile(touchedTile);
                 touchedTile.ClearTile();
             }
-            else {
+            else
+            {
                 GameData.SelectedTile.UnSelect();
             }
             GameData.SelectedTile = null;
         }
-
-        //boolean g = GameOver();
+        //GameOver();
     }
 
-    // TODO Add error handling for out of index array
+
+    //
+    //  Retrieves the letters that are in the games view frame
+    //
     public GameTile[][] GetVisibleLetters() {
 
+        // TODO Add error handling for out of index array. Consider moving to Utils.
         GameTile[][] tilesToDraw = new GameTile[Constants.TileGridLength][Constants.TileGridLength];
 
         int numX = 0;
@@ -191,22 +196,20 @@ public class Game {
     }
 
     // TODO: Implement. Move to Utils.  Also get rid of count. Is just for testing GameOver func.
-    int count = 0;
     public void GameOver()
     {
         if (gameActivity.IsTrayEmpty() || GameData.CachedTiles.size() < 1)
             return;
 
-        count++;
-
-        boolean boardIsValid = Utilities.GameOver(GameData);
-        if (boardIsValid && count > 4)
+        boolean boardIsValid = Utilities.GameOver(GameData, gameActivity.getResources());
+        if (boardIsValid)
         {
             Toast.makeText(gameActivity, "Game Over!! You win.", Toast.LENGTH_SHORT).show();
         }
         else
         {
             // Trigger error in board action
+            Toast.makeText(gameActivity, "Invalid Words", Toast.LENGTH_SHORT).show();
         }
     }
 }
