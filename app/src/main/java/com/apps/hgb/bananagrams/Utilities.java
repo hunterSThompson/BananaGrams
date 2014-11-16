@@ -11,6 +11,8 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.OutputStreamWriter;
 import java.io.StreamCorruptedException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -144,10 +146,55 @@ public final class Utilities {
         return true;
     }
 
+    // TODO: Implement. Move to Utils
+    public static boolean GameOver(GameData GameData)
+    {
+        List<GameTile> verticals = new ArrayList<GameTile>();
+        List<GameTile> horizontal = new ArrayList<GameTile>();
+
+        // Find each starting Tile of Vertical/Horizontal words
+        GameTile above, below, left, right;
+        for (GameTile gameTile : GameData.CachedTiles)
+        {
+            above = Utilities.GetNeighborTile(GameData, gameTile, Direction.Up);
+            below = Utilities.GetNeighborTile(GameData, gameTile, Direction.Down);
+            left = Utilities.GetNeighborTile(GameData, gameTile, Direction.Left);
+            right = Utilities.GetNeighborTile(GameData, gameTile, Direction.Right);
+
+            if (!above.HasLetter && below.HasLetter)
+                verticals.add(gameTile);
+
+            if (!left.HasLetter && right.HasLetter)
+                horizontal.add(gameTile);
+        }
+
+        // TODO move some of these methods to Board class after creating it.  Should rap GameTiles[i][j]
+
+        for (GameTile gameTile : verticals)
+        {
+            String word = Utilities.getLetters(gameTile, GameData, Direction.Down);
+            boolean validWord = Utilities.LookUp(word);
+            if (!validWord)
+                return false;
+        }
+
+        for (GameTile gameTile : horizontal)
+        {
+            String word = Utilities.getLetters(gameTile, GameData, Direction.Right);
+            boolean validWord = Utilities.LookUp(word);
+            if (!validWord)
+                return false;
+        }
+
+        return true;
+    }
+
     //
     //
     //
-    static public GameTile GetNeighborTile(GameData gameData, GameTile gameTile, Direction direction) {
+    static public GameTile GetNeighborTile(GameData gameData, GameTile gameTile, Direction direction)
+    {
+
         int X = gameTile.X;
         int Y = gameTile.Y;
 
@@ -157,17 +204,41 @@ public final class Utilities {
         if (!xInBound || !yInBound)
             return null;
 
-        try {
-            if (direction == Direction.Down) {
-                return gameData.gameTiles[gameTile.X][gameTile.Y - 1];
-            } else if (direction == Direction.Up) {
+        try
+        {
+            switch (direction)
+            {
+                case Down:
+                    return gameData.gameTiles[gameTile.X][gameTile.Y + 1];
+                case Up:
+                    return gameData.gameTiles[gameTile.X][gameTile.Y - 1];
+                case Left:
+                    return gameData.gameTiles[gameTile.X - 1][gameTile.Y];
+                case Right:
+                    return gameData.gameTiles[gameTile.X + 1][gameTile.Y];
+                default:
+                    return null;
+            }
+
+            /*
+            if (direction == Direction.Down)
+            {
                 return gameData.gameTiles[gameTile.X][gameTile.Y + 1];
-            } else if (direction == Direction.Left) {
+            }
+            else if (direction == Direction.Up)
+            {
+                return gameData.gameTiles[gameTile.X][gameTile.Y - 1];
+            }
+            else if (direction == Direction.Left)
+            {
                 return gameData.gameTiles[gameTile.X - 1][gameTile.Y];
-            } else if (direction == Direction.Right) {
+            }
+            else if (direction == Direction.Right)
+            {
                 return gameData.gameTiles[gameTile.X + 1][gameTile.Y];
             }
             else return null;
+            */
         }
         catch (Exception e)
         {
@@ -179,14 +250,12 @@ public final class Utilities {
    static public String getLetters(GameTile target, GameData gameData, Direction direction)
    {
        String word = target.letter;
-       GameTile tileToTheRight;
-       while (true)
+       GameTile tileToTheRight = target;
+       int i = 0;
+       while (tileToTheRight == null || tileToTheRight.HasLetter)
        {
-           tileToTheRight = GetNeighborTile(gameData, target, direction);
-           if (tileToTheRight != null || tileToTheRight.HasLetter)
-                word += tileToTheRight.letter;
-           else
-               break;
+           tileToTheRight = GetNeighborTile(gameData, tileToTheRight, direction);
+           word += tileToTheRight.letter;
        }
        return word;
    }

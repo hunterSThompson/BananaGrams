@@ -1,6 +1,7 @@
 package com.apps.hgb.bananagrams;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +45,10 @@ public class Game {
         InitializeTiles();
 
         // Initialize view frame
-        /*
-        GameData.xStart = Constants.newGameXStart;
-        GameData.xEnd= Constants.newGameXEnd;
-        GameData.yStart = Constants.newGameYStart;
-        GameData.yEnd = Constants.newGameYEnd;
-        */
-
-        GameData.xStart = 50 - Constants.TileGridLength / 2;
-        GameData.xEnd = 50 + Constants.TileGridLength /2;
-        GameData.yStart = 50 - Constants.TileGridLength /2;
-        GameData.yEnd = 50 + Constants.TileGridLength /2;
+        GameData.xStart = 50 - Constants.TileGridLength/ 2;
+        GameData.xEnd = 50 + Constants.TileGridLength / 2;
+        GameData.yStart = 50 - Constants.TileGridLength / 2;
+        GameData.yEnd = 50 + Constants.TileGridLength / 2;
     }
 
     private void LoadSavedState()
@@ -137,14 +131,17 @@ public class Game {
         int difX = Math.abs(GameData.xStart - GameData.xEnd);
         int difY = Math.abs(GameData.yStart - GameData.yEnd);
 
-        if (difX != 5 || difY != 5)
+        if (difX != 5 || difY != 5)  // change 5 to constants.BoardSize
         {
             // TODO: The app should crash if our view frame isn't the right num of things...
         }
 
-        try {
-            for (int i = GameData.xStart; i < GameData.xEnd; i++) {
-                for (int j = GameData.yStart; j < GameData.yEnd; j++) {
+        try
+        {
+            for (int i = GameData.xStart; i < GameData.xEnd; i++)
+            {
+                for (int j = GameData.yStart; j < GameData.yEnd; j++)
+                {
                     tilesToDraw[numX][numY] = GameData.gameTiles[i][j];
                     numY++;
                 }
@@ -182,6 +179,8 @@ public class Game {
         GameData.CachedTiles.add(GameData.SelectedTile);
         GameData.SelectedTile = null;
 
+        GameOver();
+
         return true;
     }
 
@@ -191,47 +190,23 @@ public class Game {
             Utilities.Serialize(GameData, gameActivity);
     }
 
-    // TODO: Implement. Move to Utils
-    public boolean GameOver()
+    // TODO: Implement. Move to Utils.  Also get rid of count. Is just for testing GameOver func.
+    int count = 0;
+    public void GameOver()
     {
-        //if (gameActivity.IsTrayEmpty())
-        //    return false;
+        if (gameActivity.IsTrayEmpty() || GameData.CachedTiles.size() < 1)
+            return;
 
-        List<GameTile> verticals = new ArrayList<GameTile>();
-        List<GameTile> horizontal = new ArrayList<GameTile>();
+        count++;
 
-        // Find each starting Tile of Vertical/Horizontal words
-        GameTile above, below, left, right;
-        for (GameTile gameTile : GameData.CachedTiles)
+        boolean boardIsValid = Utilities.GameOver(GameData);
+        if (boardIsValid && count > 4)
         {
-            above = Utilities.GetNeighborTile(GameData, gameTile, Direction.Up);
-            below = Utilities.GetNeighborTile(GameData, gameTile, Direction.Down);
-            left = Utilities.GetNeighborTile(GameData, gameTile, Direction.Left);
-            right = Utilities.GetNeighborTile(GameData, gameTile, Direction.Right);
-
-            if (!above.HasLetter && below.HasLetter)
-                verticals.add(gameTile);
-
-            if (!left.HasLetter && right.HasLetter)
-                horizontal.add(gameTile);
+            Toast.makeText(gameActivity, "Game Over!! You win.", Toast.LENGTH_SHORT).show();
         }
-
-        for (GameTile gameTile : verticals)
+        else
         {
-            String word = Utilities.getLetters(gameTile, GameData, Direction.Down);
-            boolean validWord = Utilities.LookUp(word);
-            if (!validWord)
-                return false;
+            // Trigger error in board action
         }
-
-        for (GameTile gameTile : horizontal)
-        {
-            String word = Utilities.getLetters(gameTile, GameData, Direction.Right);
-            boolean validWord = Utilities.LookUp(word);
-            if (!validWord)
-                return false;
-        }
-
-        return true;
     }
 }

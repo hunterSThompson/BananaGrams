@@ -36,14 +36,13 @@ public class GameActivity extends Activity {
         else
             game = new Game(this, false);
 
+        // Initialize game board
         gameBoard = new GameBoard(this, game);
-        gameContainer = (RelativeLayout) findViewById(R.id.gameCont);
-        gameContainer.addView(gameBoard);
+        ((RelativeLayout) findViewById(R.id.gameCont)).addView(gameBoard);
 
         gameBoard.requestFocus();
 
-        String[] letts = Utilities.ShuffleGameLetters();
-
+        // todo remove
         getButtons2();
     }
 
@@ -62,41 +61,10 @@ public class GameActivity extends Activity {
             game.SaveState();
     }
 
-    private void InitTrayButtons()
+    // TODO implement
+    public boolean IsTrayEmpty()
     {
-        String[] letts = Utilities.ShuffleGameLetters();
-        for (int i = 0; i < letts.length; i++)
-
-            for (int j = 0; j < 9; j++) {
-                LinearLayout row = new LinearLayout(this);
-                row.setOrientation(LinearLayout.HORIZONTAL);
-                //row.setLayoutParams(new LinearLayout.LayoutParams(
-                        //LinearLayout.LayoutParams.FILL_PARENT,
-                //));
-            }
-    }
-
-    private ArrayList<ArrayList<Button>> getButtons()
-    {
-        if (buttonTray == null)
-            return null; // Log error also
-
-        ArrayList<ArrayList<Button>> rows = new ArrayList<ArrayList<Button>>();
-        for (int i = 0; i < buttonTray.getChildCount(); i++)
-        {
-            LinearLayout row = (LinearLayout) buttonTray.getChildAt(i);
-            rows.add(getButtonsFromRow(row));
-        }
-        return rows;
-    }
-
-    private ArrayList<Button> getButtonsFromRow(LinearLayout row)
-    {
-        ArrayList<Button> buttons = new ArrayList<Button>();
-        for (int i=0; i < buttonTray.getChildCount(); i++){
-            buttons.add((Button)row.getChildAt(i));
-        }
-        return buttons;
+        return true;
     }
 
     private void getButtons2()
