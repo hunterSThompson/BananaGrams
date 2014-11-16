@@ -136,7 +136,7 @@ public final class Utilities {
     }
 
     //
-    //
+    //  Returns true if 'word' param is valid english word.
     //
     public static boolean LookUp(String word, Resources res)
     {
@@ -173,12 +173,17 @@ public final class Utilities {
         }
     }
 
+    //
+    // Returns true if all words on board are valid.
+    //
     public static boolean GameOver(GameData GameData, Resources resources)
     {
         List<GameTile> verticals = new ArrayList<GameTile>();
         List<GameTile> horizontal = new ArrayList<GameTile>();
 
-        // Find each starting Tile of Vertical/Horizontal words
+        // Find each starting Tile of Vertical/Horizontal words.
+        // Vertical starting tile -> tile above is empty & tile below is NOT empty
+        // Horizontal starting tile -> tile to left is empty & tile to right is NOT empty
         GameTile above, below, left, right;
         for (GameTile gameTile : GameData.CachedTiles)
         {
@@ -186,6 +191,9 @@ public final class Utilities {
             below = GetNeighborTile(GameData, gameTile, Direction.Down);
             left = GetNeighborTile(GameData, gameTile, Direction.Left);
             right = GetNeighborTile(GameData, gameTile, Direction.Right);
+
+            if (!above.HasLetter && !below.HasLetter && !left.HasLetter && !right.HasLetter)
+                return false;
 
             if (!above.HasLetter && below.HasLetter)
                 verticals.add(gameTile);
@@ -196,6 +204,7 @@ public final class Utilities {
 
         // TODO move some of these methods to Board class after creating it.  Should rap GameTiles[i][j]
 
+        // Check each vertical word
         for (GameTile gameTile : verticals)
         {
             String word = Utilities.getLetters(gameTile, GameData, Direction.Down);
@@ -204,6 +213,7 @@ public final class Utilities {
                 return false;
         }
 
+        // Check each horizontal word
         for (GameTile gameTile : horizontal)
         {
             String word = Utilities.getLetters(gameTile, GameData, Direction.Right);
@@ -216,7 +226,7 @@ public final class Utilities {
     }
 
     //
-    //
+    //  Get the up, down, left, or right neigbor of a tile.
     //
     static public GameTile GetNeighborTile(GameData gameData, GameTile gameTile, Direction direction)
     {
@@ -245,26 +255,6 @@ public final class Utilities {
                 default:
                     return null;
             }
-
-            /*
-            if (direction == Direction.Down)
-            {
-                return gameData.gameTiles[gameTile.X][gameTile.Y + 1];
-            }
-            else if (direction == Direction.Up)
-            {
-                return gameData.gameTiles[gameTile.X][gameTile.Y - 1];
-            }
-            else if (direction == Direction.Left)
-            {
-                return gameData.gameTiles[gameTile.X - 1][gameTile.Y];
-            }
-            else if (direction == Direction.Right)
-            {
-                return gameData.gameTiles[gameTile.X + 1][gameTile.Y];
-            }
-            else return null;
-            */
         }
         catch (Exception e)
         {
@@ -273,14 +263,18 @@ public final class Utilities {
         return null;
     }
 
+   //
+   //  Will return the word on GameBoard from passing the starting tile.
+   //
    static public String getLetters(GameTile target, GameData gameData, Direction direction)
    {
        String word = target.letter;
        GameTile tileToTheRight = target;
-       int i = 0;
-       while (tileToTheRight == null || tileToTheRight.HasLetter)
+       while (tileToTheRight.HasLetter)
        {
            tileToTheRight = GetNeighborTile(gameData, tileToTheRight, direction);
+           if (tileToTheRight == null)
+               break;
            word += tileToTheRight.letter;
        }
        return word;
