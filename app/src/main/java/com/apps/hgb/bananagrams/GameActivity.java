@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class GameActivity extends Activity {
 
-    RelativeLayout gameContainer;
     Game game;
     GameBoard gameBoard;
     LinearLayout buttonTray;
@@ -42,7 +41,7 @@ public class GameActivity extends Activity {
 
         gameBoard.requestFocus();
 
-        // todo remove
+        // todo recode.
         getButtons2();
     }
 

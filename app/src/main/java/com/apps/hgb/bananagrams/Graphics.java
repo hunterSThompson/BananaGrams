@@ -38,11 +38,11 @@ public class Graphics {
         selectedTileRed.setAlpha(128);
     }
 
-    public void Draw(Canvas canvas, int height, int width, Game game) {
+    public void Draw(Canvas canvas, int height, int width, Game game)
+    {
         DrawLetters(canvas, height, width, game);
     }
 
-    // TODO move alot of these nums to Constants file
     private void DrawLetters(Canvas canvas, int height, int width, Game game)
     {
         GameTile[][] gameTiles = game.GetVisibleLetters();

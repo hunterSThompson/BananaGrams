@@ -17,12 +17,13 @@ public class Command implements Serializable {
         this.gameData = gameData;
     }
 
-    private void SetOldState(GameTile gametile)
+    public void SetOldState(GameTile gametile)
     {
         OldState = new GameTile(gametile);
     }
 
-    private void SetNewState(GameTile gametile)
+    // Most likely will never use this.
+    public void SetNewState(GameTile gametile)
     {
         NewState = new GameTile(gametile);
     }
@@ -30,16 +31,29 @@ public class Command implements Serializable {
     // Change to take GameData. Can't serialize this otherwise due to circular reference.
     public void Forward()
     {
+        if (NewState == null || gameData == null)
+            return;
+
+        GameTile tile;
+
+        try
+        {
+            tile = gameData.gameTiles[OldState.X][OldState.Y];
+            tile.LoadState(OldState);
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     public void Backward()
     {
-        //if (OldState == null)
-            //throw new Exception();
+        if (OldState == null)
+            return;
 
         GameTile tile;
 
-        // Get tile by cords of Old State
+        // Get tile by cords of OldState and load former state
         try
         {
             tile = gameData.gameTiles[OldState.X][OldState.Y];

@@ -1,10 +1,6 @@
 package com.apps.hgb.bananagrams;
 
-import android.content.Context;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Hunt on 9/28/2014.
@@ -118,7 +114,7 @@ public class Game {
             }
             GameData.SelectedTile = null;
         }
-        //GameOver();
+        //CheckGameState();
     }
 
 
@@ -184,7 +180,7 @@ public class Game {
         GameData.CachedTiles.add(GameData.SelectedTile);
         GameData.SelectedTile = null;
 
-        GameOver();
+        CheckGameState();
 
         return true;
     }
@@ -195,8 +191,7 @@ public class Game {
             Utilities.Serialize(GameData, gameActivity);
     }
 
-    // TODO: Implement. Move to Utils.  Also get rid of count. Is just for testing GameOver func.
-    public void GameOver()
+    public void CheckGameState()
     {
         if (gameActivity.IsTrayEmpty() || GameData.CachedTiles.size() < 1)
             return;
