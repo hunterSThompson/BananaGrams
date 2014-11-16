@@ -52,11 +52,22 @@ public class GameTile implements Serializable {
 
     // TODO Add methods for Delete/Highlight/Unhighlight
 
-    public GameTile(String letter, boolean selected, boolean hasLetter)
+    public GameTile(GameTile gameTile)
     {
-        this.letter = letter;
-        this.Selected = selected;
-        this.HasLetter = hasLetter;
+        this.letter = gameTile.letter;
+        this.Selected = gameTile.Selected;
+        this.HasLetter = gameTile.HasLetter;
+        this.X = gameTile.X;
+        this.Y = gameTile.Y;
+    }
+
+    public void LoadState(GameTile gameTile)
+    {
+        this.letter = gameTile.letter;
+        this.Selected = gameTile.Selected;
+        this.HasLetter = gameTile.HasLetter;
+        this.X = gameTile.X;
+        this.Y = gameTile.Y;
     }
 
 }
