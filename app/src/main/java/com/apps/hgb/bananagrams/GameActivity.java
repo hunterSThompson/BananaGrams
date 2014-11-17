@@ -42,7 +42,7 @@ public class GameActivity extends Activity {
 
         //
         //
-        final ButtonTray adapter = new ButtonTray(this);
+        final ButtonTray adapter = new ButtonTray(this, game);
         buttonTray = (GridView) findViewById(R.id.ButtonContainer);
         buttonTray.setAdapter(adapter);
         buttonTray.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -122,6 +122,11 @@ public class GameActivity extends Activity {
                 gameBoard.Invalidate();
             }
         });
+    }
+
+    public void InvalidateGameBoard()
+    {
+        gameBoard.Invalidate();
     }
 
     public void rightClick(View v)

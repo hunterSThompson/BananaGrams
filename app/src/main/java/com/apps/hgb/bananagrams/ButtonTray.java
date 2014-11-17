@@ -18,6 +18,7 @@ import java.util.List;
 public class ButtonTray extends BaseAdapter {
 
     private Context mContext;
+    private Game game;
     //private List<String> web;
 
     List<String> web = new ArrayList<String>(Arrays.asList(
@@ -35,8 +36,9 @@ public class ButtonTray extends BaseAdapter {
         web.add(letter);
     }
 
-    public ButtonTray(Context c) {
+    public ButtonTray(Context c, Game game) {
         mContext = c;
+        this.game = game;
     }
 
     @Override
@@ -57,6 +59,8 @@ public class ButtonTray extends BaseAdapter {
         return 0;
     }
 
+    ButtonTray bt = this;
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -68,9 +72,24 @@ public class ButtonTray extends BaseAdapter {
         //grid = new View(mContext);
         grid = new TextView(mContext);
         TextView t = (TextView) grid;
-        //Button b = new Button(mContext);
-        //b.setText(web.get(position));
+        //Button b = (Button) grid;
+
         t.setText(web.get(position));
+        //t.setText(web.get(position));
+
+        t.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String letter = ((TextView) view).getText().toString();
+                if (!game.AddTileToBoard(letter))
+                    return;
+
+                ((GameActivity) mContext).InvalidateGameBoard();
+                web.remove(position);
+                bt.notifyDataSetChanged();
+            }
+        });
 
         return grid;
     }
