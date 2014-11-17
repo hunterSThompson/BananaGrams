@@ -196,7 +196,7 @@ public class Game {
 
     public void CheckGameState()
     {
-        if (gameActivity.IsTrayEmpty() || GameData.CachedTiles.size() < 1)
+        if (!gameActivity.IsTrayEmpty() || GameData.CachedTiles.size() < 1)
             return;
 
         boolean boardIsValid = Utilities.GameOver(GameData, gameActivity.getResources());

@@ -41,24 +41,10 @@ public class GameActivity extends Activity {
         gameBoard = new GameBoard(this, game);
         ((RelativeLayout) findViewById(R.id.gameCont)).addView(gameBoard);
 
-        //
-        //
+        // Initialize tile tray
         tray = new ButtonTray(this, game);
         buttonTray = (GridView) findViewById(R.id.ButtonContainer);
         buttonTray.setAdapter(tray);
-        /*
-        buttonTray.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                tray.RemoveItem(position);
-                //Toast.makeText(GameActivity.this, "You Clicked at " + web1.get(+position), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        */
 
         gameBoard.requestFocus();
     }
