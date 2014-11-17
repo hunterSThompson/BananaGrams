@@ -7,9 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,15 +21,13 @@ public class GameActivity extends Activity {
 
     Game game;
     GameBoard gameBoard;
-    LinearLayout buttonTray;
+    GridView buttonTray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        // TODO get rid of crap
-        buttonTray = (LinearLayout) findViewById(R.id.ButtonContainer);
 
         // Continue or start New Game
         boolean continuingGame = getIntent().getBooleanExtra("continueGame", false);
@@ -38,6 +39,28 @@ public class GameActivity extends Activity {
         // Initialize game board
         gameBoard = new GameBoard(this, game);
         ((RelativeLayout) findViewById(R.id.gameCont)).addView(gameBoard);
+
+        //
+        //
+        final ButtonTray adapter = new ButtonTray(this);
+        buttonTray = (GridView) findViewById(R.id.ButtonContainer);
+        buttonTray.setAdapter(adapter);
+        buttonTray.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                adapter.RemoveItem(position);
+                //Toast.makeText(GameActivity.this, "You Clicked at " + web1.get(+position), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        //buttonTray.setOnClickListener(new AdapterView.set);
+        // Init Grid View here
+        //
+        //
 
         gameBoard.requestFocus();
 
