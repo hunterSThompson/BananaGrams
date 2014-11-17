@@ -34,11 +34,16 @@ public class ButtonTray extends BaseAdapter {
     public void AddTile(String letter)
     {
         web.add(letter);
+        this.notifyDataSetChanged();
     }
 
     public ButtonTray(Context c, Game game) {
         mContext = c;
         this.game = game;
+
+        web = new ArrayList<String>(Arrays.asList(
+                Utilities.ShuffleGameLetters()
+        ));
     }
 
     @Override

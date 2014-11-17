@@ -105,7 +105,7 @@ public class Game {
         {
             if (GameData.SelectedTile == touchedTile)
             {
-                //PopTile(touchedTile);
+                PopTile(touchedTile);
                 touchedTile.ClearTile();
             }
             else
@@ -163,7 +163,7 @@ public class Game {
     //
     private void PopTile(GameTile gt)
     {
-        //gameActivity.PopTile();
+        gameActivity.PopTile(gt.letter);
         GameData.CachedTiles.remove(gt);
     }
 

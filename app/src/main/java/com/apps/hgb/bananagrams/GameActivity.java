@@ -22,6 +22,7 @@ public class GameActivity extends Activity {
     Game game;
     GameBoard gameBoard;
     GridView buttonTray;
+    ButtonTray tray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class GameActivity extends Activity {
 
             }
         });
+        tray = adapter;
 
         //buttonTray.setOnClickListener(new AdapterView.set);
         // Init Grid View here
@@ -122,6 +124,11 @@ public class GameActivity extends Activity {
                 gameBoard.Invalidate();
             }
         });
+    }
+
+    public void PopTile(String letter)
+    {
+        tray.AddTile(letter);
     }
 
     public void InvalidateGameBoard()
