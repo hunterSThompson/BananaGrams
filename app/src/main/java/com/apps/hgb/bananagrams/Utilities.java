@@ -23,8 +23,7 @@ import java.util.Random;
  */
 public final class Utilities {
 
-    //TODO refactor to take GameData instead of Game object. sloppy
-    static GameTile GetTouchedTile(float x, float y, Game game, float height, float width)
+    static GameTile GetTouchedTile(float x, float y, GameData game, float height, float width)
     {
         int n = Constants.TileGridLength;
         float cellWidth = width / n;
@@ -36,8 +35,8 @@ public final class Utilities {
         int xTileNum = (int) tileX;
         int yTileNum = (int) tileY;
 
-        int xf = xTileNum + game.GameData.xStart;
-        int yf = yTileNum + game.GameData.yStart;
+        int xf = xTileNum + game.xStart;
+        int yf = yTileNum + game.yStart;
 
         // TODO:  Throw WTF error here
         if ((xf | yf) > 100)
@@ -47,8 +46,8 @@ public final class Utilities {
         {
         }
 
-        GameTile gt = game.GameData.gameTiles[xf][yf];
-        return game.GameData.gameTiles[xf][yf];
+        GameTile gt = game.gameTiles[xf][yf];
+        return game.gameTiles[xf][yf];
     }
 
     //

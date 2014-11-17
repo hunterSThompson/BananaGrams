@@ -31,7 +31,7 @@ public class GameActivity extends Activity {
 
 
         // Continue or start New Game
-        boolean continuingGame = getIntent().getBooleanExtra("continueGame", false);
+        boolean continuingGame = getIntent().getBooleanExtra("continueGame", false); // todo move string to constants
         if (continuingGame)
             game = new Game(this, true);
         else
@@ -43,31 +43,24 @@ public class GameActivity extends Activity {
 
         //
         //
-        final ButtonTray adapter = new ButtonTray(this, game);
+        tray = new ButtonTray(this, game);
         buttonTray = (GridView) findViewById(R.id.ButtonContainer);
-        buttonTray.setAdapter(adapter);
+        buttonTray.setAdapter(tray);
+        /*
         buttonTray.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                adapter.RemoveItem(position);
+                tray.RemoveItem(position);
                 //Toast.makeText(GameActivity.this, "You Clicked at " + web1.get(+position), Toast.LENGTH_SHORT).show();
 
             }
         });
-        tray = adapter;
-
-        //buttonTray.setOnClickListener(new AdapterView.set);
-        // Init Grid View here
-        //
-        //
+        */
 
         gameBoard.requestFocus();
-
-        // todo recode.
-        getButtons2();
     }
 
     @Override
@@ -85,45 +78,9 @@ public class GameActivity extends Activity {
             game.SaveState();
     }
 
-    // TODO implement
     public boolean IsTrayEmpty()
     {
-        return false;
-    }
-
-    private void getButtons2()
-    {
-        if (buttonTray == null)
-            return; // Log error also
-
-        for (int i = 0; i < buttonTray.getChildCount(); i++)
-        {
-            LinearLayout row = (LinearLayout) buttonTray.getChildAt(i);
-            getButtonsFromRow2(row);
-        }
-    }
-
-    private void getButtonsFromRow2(LinearLayout row)
-    {
-        for (int i=0; i < row.getChildCount(); i++){
-            Button b = (Button)row.getChildAt(i);
-            setButtonClickListener(b);
-        }
-    }
-
-    private void setButtonClickListener(Button b)
-    {
-        b.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Button b = (Button) v;
-                String text = b.getText().toString();
-
-                if (!game.AddTileToBoard(text))
-                    return;
-                ((ViewGroup) v.getParent()).removeView(v);
-                gameBoard.Invalidate();
-            }
-        });
+        return tray.getCount() < 1;
     }
 
     public void PopTile(String letter)

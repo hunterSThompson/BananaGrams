@@ -68,7 +68,6 @@ public class Game {
         GameData.gameTiles = gts;
     }
 
-    // TODO: Change these one method with switch later
     public void MoveLeft()
     {
         GameData.xStart += 1;
@@ -93,9 +92,12 @@ public class Game {
         GameData.yEnd += 1;
     }
 
+    //
+    //  Hnadler for a board touch
+    //
     public void BoardClick(float x, float y, float height, float width)
     {
-        GameTile touchedTile = Utilities.GetTouchedTile(x, y, this, height, width);
+        GameTile touchedTile = Utilities.GetTouchedTile(x, y, GameData, height, width);
 
         if (GameData.SelectedTile == null) {
             touchedTile.Select();
@@ -173,6 +175,7 @@ public class Game {
     //
     public boolean AddTileToBoard(String letter)
     {
+        // todo make sure adding tile to tile that already has letter is handled
         if (GameData.SelectedTile == null)
             return false;
 
@@ -204,7 +207,7 @@ public class Game {
         else
         {
             // Trigger error in board action
-            Toast.makeText(gameActivity, "Invalid Words", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(gameActivity, "Invalid Words", Toast.LENGTH_SHORT).show();
         }
     }
 }

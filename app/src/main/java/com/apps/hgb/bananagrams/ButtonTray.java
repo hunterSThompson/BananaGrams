@@ -1,7 +1,6 @@
 package com.apps.hgb.bananagrams;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,37 +18,35 @@ public class ButtonTray extends BaseAdapter {
 
     private Context mContext;
     private Game game;
-    //private List<String> web;
-
-    List<String> web = new ArrayList<String>(Arrays.asList(
-            Constants.Letters
-    ));
-
-    public void RemoveItem(int pos)
-    {
-        web.remove(pos);
-        this.notifyDataSetChanged();
-    }
-
-    public void AddTile(String letter)
-    {
-        web.add(letter);
-        this.notifyDataSetChanged();
-    }
+    List<String> letters;
 
     public ButtonTray(Context c, Game game) {
         mContext = c;
         this.game = game;
 
-        web = new ArrayList<String>(Arrays.asList(
+        letters = new ArrayList<String>(Arrays.asList(
                 Utilities.ShuffleGameLetters()
         ));
+    }
+
+    public void RemoveItem(int pos)
+    {
+        letters.remove(pos);
+        this.notifyDataSetChanged();
+    }
+
+    // todo write methods so this data is serialized on save / de-serialized and loaded
+
+    public void AddTile(String letter)
+    {
+        letters.add(letter);
+        this.notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return web.size();
+        return letters.size();
     }
 
     @Override
@@ -69,18 +66,28 @@ public class ButtonTray extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        // TODO Auto-generated method stub
+        // TODO Settup inflator. Wayyyyy easier to set properties and such there.
         View grid;
+
+        //
         //LayoutInflater inflater = (LayoutInflater) mContext
                 //.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //
 
-        //grid = new View(mContext);
+        /*
+        Button buyButton = new Button(mContext);
+        buyButton.setText(letters.get(position));
+        buyButton.setLayoutParams(new LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        */
+
         grid = new TextView(mContext);
         TextView t = (TextView) grid;
         //Button b = (Button) grid;
 
-        t.setText(web.get(position));
-        //t.setText(web.get(position));
+        t.setText(letters.get(position));
+        //t.setText(letters.get(position));
 
         t.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +98,7 @@ public class ButtonTray extends BaseAdapter {
                     return;
 
                 ((GameActivity) mContext).InvalidateGameBoard();
-                web.remove(position);
+                letters.remove(position);
                 bt.notifyDataSetChanged();
             }
         });

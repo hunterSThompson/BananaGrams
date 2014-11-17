@@ -50,8 +50,6 @@ public class GameTile implements Serializable {
         this.letter = letter;
     }
 
-    // TODO Add methods for Delete/Highlight/Unhighlight
-
     public GameTile(GameTile gameTile)
     {
         this.letter = gameTile.letter;
