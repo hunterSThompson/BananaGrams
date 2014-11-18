@@ -36,7 +36,7 @@ public class ButtonTray extends BaseAdapter {
     }
 
     // todo write methods so this data is serialized on save / de-serialized and loaded
-
+    // could actually make this memeber of Game class
     public void AddTile(String letter)
     {
         letters.add(letter);
@@ -62,41 +62,31 @@ public class ButtonTray extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         // TODO Settup inflator. Wayyyyy easier to set properties and such there.
-        View grid;
 
-        //
-        //LayoutInflater inflater = (LayoutInflater) mContext
-                //.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //
-
-        /*
-        Button buyButton = new Button(mContext);
-        buyButton.setText(letters.get(position));
-        buyButton.setLayoutParams(new LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        */
-
-        grid = new TextView(mContext);
-        TextView t = (TextView) grid;
-        //Button b = (Button) grid;
-
+        View grid = new Button(mContext);
+        Button t = (Button) grid;
         t.setText(letters.get(position));
-        //t.setText(letters.get(position));
 
-        t.setOnClickListener(new View.OnClickListener() {
+        AttachClickListener(t, position);
+
+        return grid;
+    }
+
+    private void AttachClickListener(Button b, final int position)
+    {
+        b.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
-                String letter = ((TextView) view).getText().toString();
+                String letter = ((Button) view).getText().toString();
                 if (!game.AddTileToBoard(letter))
                     return;
 
                 ((GameActivity) mContext).InvalidateGameBoard();
                 RemoveItem(position);
             }
-        });
 
-        return grid;
+        });
     }
 }
