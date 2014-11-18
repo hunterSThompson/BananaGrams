@@ -45,23 +45,18 @@ public class ButtonTray extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return letters.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
-
-    ButtonTray bt = this;
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -98,8 +93,7 @@ public class ButtonTray extends BaseAdapter {
                     return;
 
                 ((GameActivity) mContext).InvalidateGameBoard();
-                letters.remove(position);
-                bt.notifyDataSetChanged();
+                RemoveItem(position);
             }
         });
 
