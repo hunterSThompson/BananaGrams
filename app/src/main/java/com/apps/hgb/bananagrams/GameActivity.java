@@ -50,7 +50,8 @@ public class GameActivity extends Activity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume()
+    {
         super.onResume();
         if (game == null)
             game = new Game(this, true);
