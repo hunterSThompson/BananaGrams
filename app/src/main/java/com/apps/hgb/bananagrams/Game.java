@@ -99,24 +99,30 @@ public class Game {
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, GameData, height, width);
 
-        if (GameData.SelectedTile == null) {
+        // If no tile is selected, select save and cache it.
+        if (GameData.SelectedTile == null)
+        {
             touchedTile.Select();
             GameData.SelectedTile = touchedTile;
         }
+        // If a tile is selected...
         else
         {
+            // If selected tile is the touched, move it to the tray and the clear the tile.
             if (GameData.SelectedTile == touchedTile)
             {
-                PopTile(touchedTile);
-                touchedTile.ClearTile();
+                PopTile(touchedTile); // Add tile back to tray
+                GameData.CachedTiles.remove(touchedTile); // Remove from occupied tile cache
+                touchedTile.ClearTile(); // Clear letter/selection of tile
             }
+            // If not...
             else
             {
-                GameData.SelectedTile.UnSelect();
+                GameData.SelectedTile.UnSelect();  // Un-select current selected tile
+                GameData.SelectedTile = touchedTile; // Cache the new tile
+                GameData.SelectedTile.Select(); // Select the new one
             }
-            GameData.SelectedTile = null;
         }
-        //CheckGameState();
     }
 
 
@@ -126,6 +132,7 @@ public class Game {
     public GameTile[][] GetVisibleLetters() {
 
         // TODO Add error handling for out of index array. Consider moving to Utils.
+        // Should put this within GameData class
         GameTile[][] tilesToDraw = new GameTile[Constants.TileGridLength][Constants.TileGridLength];
 
         int numX = 0;
@@ -154,7 +161,7 @@ public class Game {
         }
         catch(Exception e)
         {
-            String mess = e.getMessage();
+            String message = e.getMessage();
         }
 
         return tilesToDraw;
@@ -166,7 +173,6 @@ public class Game {
     private void PopTile(GameTile gt)
     {
         gameActivity.PopTile(gt.letter);
-        GameData.CachedTiles.remove(gt);
     }
 
     //
