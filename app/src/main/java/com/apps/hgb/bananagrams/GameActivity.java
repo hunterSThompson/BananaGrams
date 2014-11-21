@@ -82,25 +82,25 @@ public class GameActivity extends Activity {
 
     public void rightClick(View v)
     {
-        game.MoveRight();
+        game.MoveBoard(Direction.Right);
         gameBoard.invalidate();
     }
 
     public void leftClick(View v)
     {
-        game.MoveLeft();
+        game.MoveBoard(Direction.Left);
         gameBoard.invalidate();
     }
 
     public void upClick(View v)
     {
-        game.MoveUp();
+        game.MoveBoard(Direction.Up);
         gameBoard.invalidate();
     }
 
     public void downClick(View v)
     {
-        game.MoveDown();
+        game.MoveBoard(Direction.Down);
         gameBoard.invalidate();
     }
 

@@ -22,40 +22,40 @@
 
             <Button
                 android:onClick="leftClick"
+                android:id="@+id/LeftButton"
                 android:layout_gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="L"
-                android:id="@+id/button"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
             <Button
                 android:onClick="upClick"
+                android:id="@+id/UpButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="U"
-                android:id="@+id/button3"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
 
             <Button
                 android:onClick="rightClick"
+                android:id="@+id/RightButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R"
-                android:id="@+id/button5"
                 android:layout_alignTop="@+id/button"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
             <Button
                 android:onClick="downClick"
+                android:id="@+id/DownButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="D"
-                android:id="@+id/button7"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>

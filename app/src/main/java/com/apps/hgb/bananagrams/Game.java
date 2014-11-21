@@ -68,52 +68,81 @@ public class Game {
         GameData.gameTiles = gts;
     }
 
-    public void MoveLeft()
+    public void MoveBoard(Direction direction)
+    {
+        if (CheckBounds())
+            return;
+
+        switch (direction)
+        {
+            case Up:
+                MoveUp();
+                return;
+            case Down:
+                MoveDown();
+                return;
+            case Left:
+                MoveLeft();
+                return;
+            case Right:
+                MoveRight();
+                return;
+        }
+    }
+
+    // todo set nums to constants
+    private boolean CheckBounds()
+    {
+        return GameData.xStart < 1 || GameData.xEnd > 98 || GameData.yStart < 1 || GameData.yEnd > 98;
+    }
+
+    private void MoveLeft()
     {
         GameData.xStart += 1;
         GameData.xEnd += 1;
     }
 
-    public void MoveRight()
+    private void MoveRight()
     {
         GameData.xStart -= 1;
         GameData.xEnd -= 1;
     }
 
-    public void MoveDown()
+    private void MoveDown()
     {
         GameData.yStart -= 1;
         GameData.yEnd -= 1;
     }
 
-    public void MoveUp()
+    private void MoveUp()
     {
         GameData.yStart += 1;
         GameData.yEnd += 1;
     }
 
     //
-    //  Hnadler for a board touch
+    //  Handler for a board touch
     //
     public void BoardClick(float x, float y, float height, float width)
     {
         GameTile touchedTile = Utilities.GetTouchedTile(x, y, GameData, height, width);
 
         // If no tile is selected, select save and cache it.
-        if (GameData.SelectedTile == null)
-        {
+        if (GameData.SelectedTile == null) {
             touchedTile.Select();
             GameData.SelectedTile = touchedTile;
         }
-        // If a tile is selected...
-        else
+        else // If a tile is selected...
         {
             // If selected tile is the touched, move it to the tray and the clear the tile.
             if (GameData.SelectedTile == touchedTile)
             {
-                PopTile(touchedTile); // Add tile back to tray
-                GameData.CachedTiles.remove(touchedTile); // Remove from occupied tile cache
+                if (touchedTile.HasLetter) {
+                    PopTile(touchedTile); // Add tile back to tray
+                    GameData.CachedTiles.remove(touchedTile); // Remove from occupied tile cache
+                }
                 touchedTile.ClearTile(); // Clear letter/selection of tile
+                GameData.SelectedTile = null;
             }
             // If not...
             else
